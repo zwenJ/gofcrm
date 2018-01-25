@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="gofcrm:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="gofcrm.war">
+      <element id="artifact" artifact-name="gofcrm:war exploded" />
+    </root>
+  </artifact>
+</component>

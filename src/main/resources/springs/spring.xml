@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+<!-- ********************** 一、注解式开发 *********************** -->
+    <!--1)注解驱动-->
+    <context:annotation-config/>
+    <!--2)用注解方式注入bean，并指定查找范围-->
+    <context:component-scan base-package="com.zking.gofcrm"/>
+
+<!-- ********************** 二、jdbc与连接池 *********************** -->
+    <!--1)引入外部属性配置文件-->
+    <import resource="classpath:springs/spring-properties.xml"/>
+
+    <!--2)配置连接池-->
+    <import resource="classpath:springs/spring-mybatis.xml"/>
+
+    <!--3)Shiro权限认证  -->
+    <import resource="classpath:springs/spring-shiro.xml"/>
+
+<!-- ************************** 四、事务 ******************** -->
+    <!--1)开启声明式事务，自动代理-->
+    <aop:aspectj-autoproxy/>
+
+    <!--2)配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--3)定义事务特性-->
+    <tx:advice id="interceptor" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="del*" propagation="REQUIRED"/>
+            <tx:method name="edit*" propagation="REQUIRED"/>
+            <tx:method name="load*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="list*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="do*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--4)定义切入点-->
+    <aop:config>
+        <!-- 定义一个切入点 -->
+        <!-- 分三部分理解 A B C D [* ][*..][*Biz][.*(..)] A:返回类型：*表示返回类型不限 B:包名和类名：即任意包下的以Biz结尾的类或接口
+            C:方法名和参数列表：任意方法名和参数类型和个数不限 -->
+        <aop:advisor advice-ref="interceptor" pointcut="execution(* *..*Service.*(..))"/>
+    </aop:config>
+
+</beans>

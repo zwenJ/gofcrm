@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zking.gofcrm.authority.mapper.CrmIdSufUtilMapper">
+
+  <resultMap id="BaseResultMap" type="com.zking.gofcrm.authority.model.CrmIdSufUtil">
+    <id column="cis_id" jdbcType="INTEGER" property="cisId" />
+    <result column="cis_table" jdbcType="VARCHAR" property="cisTable" />
+    <result column="cis_date" jdbcType="TIMESTAMP" property="cisDate" />
+    <result column="cis_key" jdbcType="INTEGER" property="cisKey" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    cis_id, cis_table, cis_date, cis_key
+  </sql>
+
+  <!-- 根据表名查询 -->
+  <select id="selectByPrimaryKey" parameterType="string" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from crm_id_suf
+    where cis_table = #{tableName}
+  </select>
+
+  <insert id="insert" parameterType="com.zking.gofcrm.authority.model.CrmIdSufUtil">
+    insert into crm_id_suf (cis_id, cis_table, cis_date, 
+      cis_key)
+    values (#{cisId,jdbcType=INTEGER}, #{cisTable,jdbcType=VARCHAR}, #{cisDate,jdbcType=TIMESTAMP}, 
+      #{cisKey,jdbcType=INTEGER})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.gofcrm.authority.model.CrmIdSufUtil">
+    update crm_id_suf
+    <set>
+      <if test="cisTable != null">
+        cis_table = #{cisTable,jdbcType=VARCHAR},
+      </if>
+      <if test="cisDate != null">
+        cis_date = #{cisDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cisKey != null">
+        cis_key = #{cisKey,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cis_id = #{cisId,jdbcType=INTEGER}
+  </update>
+
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- spring整合Shiro做权限认证、授权 -->
+
+    <bean id="shiroFilterFactoryBean" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- shiro的核心安全接口配置 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 要求登陆时的界面 -->
+        <property name="loginUrl" value="html/index.html" />
+        <!-- 登陆成功后要跳转的URL -->
+        <property name="successUrl" value="to/home" />
+        <!-- 未授权时应跳转的URL -->
+        <property name="unauthorizedUrl" value="html/error/unauthorized.html" />
+        <!-- Shiro 连接约束 ,url请求判断-->
+        <!-- 配置了不起作用啊啊啊啊啊！！！！我已在BaseController.java中使用逻辑处理 -->
+        <property name="filterChainDefinitions">
+            <value>
+                /gofcrm/** = authc[yguser]
+            </value>
+            <!--
+                anon  :   无需权限认证
+                authc   :   需要权限认证
+                roles[RootUser] | roles[PtUser]   角色配置
+
+                /common = anon
+                /home = anon
+                /manager = authc
+                /user = authc
+                /manager/** = roles[RootUser]
+                /user/** = roles[PtUser]
+             -->
+        </property>
+    </bean>
+
+    <!-- shiro的核心安全接口注册 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!-- 自定义Shiro授权认证 类中使用注解搞定 com.jzw.book.shiro.UserRealm  -->
+        <property name="realm" ref="userRealm"/>
+    </bean>
+
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+
+</beans>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>蓝科客户管理系统&nbsp;-&nbsp;完全开源、免费的CRM管理系统！</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/gofcrm/images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/gofcrm/mylib/easyui/jquery-easyui-1.5.3/themes/gray/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/gofcrm/mylib/easyui/jquery-easyui-1.5.3/themes/icon.css">
+    <script type="text/javascript" src="/gofcrm/mylib/easyui/jquery-easyui-1.5.3/jquery.min.js"></script>
+    <script type="text/javascript" src="/gofcrm/mylib/easyui/jquery-easyui-1.5.3/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/gofcrm/mylib/easyui/jquery-easyui-1.5.3/plugins/portal/jquery.portal.js"></script>
+    <script type="text/javascript" src="/gofcrm/mylib/easyui/jquery-easyui-1.5.3/plugins/easyui.resize.js"></script>
+    <link rel="stylesheet" type="text/css" href="/gofcrm/mylib/easyui/jquery-easyui-1.5.3/plugins/portal/portal.css">
+    <link rel="stylesheet" type="text/css" href="/gofcrm/mylib/easyui/style.css">
+    <script type="text/javascript" src="/gofcrm/mylib/easyui/jquery-easyui-1.5.3/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="/gofcrm/mylib/easyui/jquery-easyui-1.5.3/plugins/texteditor/texteditor.css">
+    <script type="text/javascript" src="/gofcrm/mylib/easyui/jquery-easyui-1.5.3/plugins/texteditor/jquery.texteditor.js"></script>
+    <style>
+        body {
+            font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .tac {
+            text-align: center;
+        }
+
+        table.form {
+            margin-top:24px;
+            display: inline-block;
+            background: #ffffff;
+            padding: 24px;
+
+        }
+        .divform{
+            border-radius:25px;
+            border: none;
+            box-shadow: 0 0 0 1px #ededed;
+        }
+
+
+        table.form tr td {
+            padding: 5px;
+            /*font-weight: bold;*/
+            font-size: 16px;
+            text-align: left;
+            /*color: #FFFFFF;*/
+            /*border: 1px solid gainsboro;*/
+        }
+
+        table.form tr td input, table.form tr td select {
+            width: 200px;
+        }
+        body{
+            background-image: url("/gofcrm/images/bg.jpg");
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: -1;
+        }
+        .textbox-label{
+            font-size: 16px;
+            font-weight: normal !important;
+        }
+        .submitbtn{
+            background-color: #0269B1;
+        }
+        .submitbtn  .l-btn-text{
+            line-height: 40px;
+            height: 40px;
+            font-size: 16px;
+        }
+        .textbox-text{
+            line-height: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="tac">
+    <div class="tac" style="margin-top: 6%;">&nbsp;</div>
+    <form id="form_login" method="post" action="/gofcrm/user/login" onsubmit="return form_validate();" >
+        <div class="tac"><img src="/gofcrm/images/logo.png" width="185px;"></div>
+        <div class="radius">
+            <table class="form divform">
+                <tr>
+                    <td>账户</td>
+                </tr>
+                <tr>
+                    <td><input class="easyui-textbox" name="userName"
+                               data-options="required:true" value="jzw"></td>
+                </tr>
+                <tr>
+                    <td>密码</td>
+                </tr>
+                <tr>
+                    <td><input class="easyui-textbox" name="userPwd"
+                               data-options="required:true,type:'password'" value="jzw"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <!--<a class="easyui-linkbutton submitbtn" style="display: block;background: #298ECE;color: #FFF;">提&nbsp;&nbsp;交</a>-->
+                        <input type="submit" style="display: block;background: #298ECE;color: #FFF;" value="登陆"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <div class="tac" style="margin-top:24px;"> ©2017 无锡蓝科创想科技有限公司</div>
+</div>
+<script>
+    $(function () {
+        $('#form_login').form({
+            url: "/gofcrm/user/login",
+            onSubmit: function () {
+                return $("#form_login").form("validate");
+            },
+            success: function (data) {
+                if (data.trim() == "success") {
+                    window.location.href = "/gofcrm/to/home";
+                } else {
+                    //提示信息
+                    alert("用户登陆失败！");
+                }
+            }
+        });
+    });
+    function form_login() {
+        $('#form_login').form("submit");
+    }
+    function form_validate(){
+        return $("#form_login").form("validate")
+    }
+</script>
+</body>
+<

@@ -1,0 +1,95 @@
+*{
+    border-radius: 0px !important;
+}
+a{
+    color: #000000;
+    text-decoration: none;
+}
+.tab_form{
+    width: 100%;
+    border-collapse: collapse;
+}
+.tab_form tr td{
+    padding: 8px;
+    border:1px solid gainsboro;
+    width: 33%;
+}
+.tab_form tr td input,.tab_form tr td select{
+    width: 240px;
+}
+.fr{
+    float:right;
+}
+.fl{
+    float:left;
+}
+textarea{
+    resize: none;
+    font-size: 13px;
+}
+.block{
+    display: block;
+}
+.iptborder{
+    background-color: #fff;
+    border: 1px solid #d4d4d4;
+}
+#admin_info tr td{
+    padding: 8px;
+}
+#admin_info img{
+    border: 1px solid lightgrey;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+
+/*页面优化*/
+.datagrid-header td, .datagrid-body td, .datagrid-footer td {
+    padding: 8px;
+}
+.l-btn-plain,.panel-header{
+    padding: 8px;
+}
+.l-btn-plain:hover{
+    padding: 7px;
+}
+.tabs-header{
+    padding: 8px 0 0;
+}
+.pagination-info{
+    margin: 8px !important;
+}
+.textbox-label{
+    font-weight: bold;
+}
+.panel-title{
+    height: 25px;
+    line-height: 25px;
+}
+.menu_accordion ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.menu_accordion ul li{
+    line-height: 30px;
+    height: 30px;
+    padding-left: 8px;
+}
+.menu_accordion ul li:hover{
+    background: lightgrey;
+}
+.menu_accordion ul li a{
+    display: block;
+}
+.checkactive{
+    background: lightblue;
+}
+#admin_info{
+    font-size: 12px !important;
+}
+

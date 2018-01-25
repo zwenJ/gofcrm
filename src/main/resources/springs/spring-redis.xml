@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+<!-- spring整合redis的配置文件 -->
+
+    <!-- 数据源配置 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"></property>
+        <property name="minIdle" value="${redis.minIdle}"></property>
+        <property name="maxTotal" value="${redis.maxTotal}"></property>
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"></property>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"></property>
+    </bean>
+
+    <!-- 连接池配置 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <!-- 连接名url -->
+        <property name="hostName" value="${redis.host}"></property>
+        <!-- 连接端口 -->
+        <property name="port" value="${redis.port}"></property>
+        <!-- 连接密码（没有配置Redis用户密码，可以不用设置此属性） -->
+        <property name="password" value="${redis.pass}"></property>
+        <!-- 设置超时等待时间 -->
+        <property name="timeout" value="${redis.timeout}" />
+        <property name="poolConfig" ref="poolConfig"></property>
+    </bean>
+
+    <!-- 持久化的配置 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+        <property name="keySerializer" >
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+        <property name="valueSerializer" >
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+    </bean>
+
+    <!-- 配置 Redis 的 CacheManager  -->
+    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
+        c:redisOperations-ref="redisTemplate">
+        <!-- 默认缓存10分钟 -->
+        <property name="defaultExpiration" value="600"/>
+        <property name="usePrefix" value="true"/>
+        <!-- cacheName 缓存超时配置，半小时，一小时，一天 -->
+        <property name="expires">
+            <map key-type="java.lang.String" value-type="java.lang.Long">
+                <entry key="halfHour" value="1800"/>
+                <entry key="hour" value="3600"/>
+                <entry key="oneDay" value="86400"/>
+                <!-- shiro cache keys -->
+                <entry key="authorizationCache" value="1800"/>
+                <entry key="authenticationCache" value="1800"/>
+                <entry key="activeSessionCache" value="1800"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 开启缓存注解 -->
+    <cache:annotation-driven proxy-target-class="true" cache-manager="cacheManager"/>
+
+</beans>

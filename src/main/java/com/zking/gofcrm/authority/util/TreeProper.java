@@ -11,12 +11,12 @@ import com.zking.gofcrm.common.config.AuthType;
 public class TreeProper {
 
     /**
-     * 权限类型
+     * 树类型
      */
     private String authType = AuthType.DOCUMENT+"";
 
     /**
-     * 权限对应的视图路径
+     * 树对应的视图路径
      */
     private String authUrl;
 

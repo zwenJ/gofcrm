@@ -50,9 +50,8 @@ public class ParentController {
         this.request = request;
         this.response = response;
         this.subject = SecurityUtils.getSubject();
-        this.pageBean = pageBean;
         pageBean.setRequest(request);
-
+        this.pageBean = pageBean;
     }
 
 

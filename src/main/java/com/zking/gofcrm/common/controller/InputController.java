@@ -1,5 +1,6 @@
 package com.zking.gofcrm.common.controller;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -30,6 +31,19 @@ public class InputController extends ParentController {
 
         //重定向回登陆页面
         return "redirect:/html/index.html";
+    }
+
+
+    @RequestMapping("/view/{dir}/{view}")
+    public String toView(@PathVariable("dir") String dir,
+                         @PathVariable("view") String view) {
+
+        //权限认证
+        if (!subject.hasRole("yguser")) {
+            return "redirect:/html/index.html";
+        }
+
+        return dir+"/"+view;
     }
 
 

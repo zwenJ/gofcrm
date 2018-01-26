@@ -2,6 +2,8 @@ package com.zking.gofcrm.authority.controller;
 
 import com.zking.gofcrm.authority.model.SysUser;
 import com.zking.gofcrm.common.controller.ParentController;
+import com.zking.gofcrm.common.service.IBaseService;
+import com.zking.gofcrm.common.util.Datagrid;
 import org.apache.http.HttpRequest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -9,10 +11,14 @@ import org.apache.shiro.mgt.SubjectFactory;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 说明：略
@@ -24,6 +30,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController extends ParentController {
 
     private Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    @Resource(name = "UserServiceImpl")
+    private IBaseService<SysUser> sysUserServiceBase;
 
     /**
      * 用户登录
@@ -77,9 +86,24 @@ public class UserController extends ParentController {
         subject.logout();
 
         //用户登出
-        return "redirect:/html/index1.html";
+        return "redirect:/html/index.html";
     }
 
+
+
+    @RequestMapping("/show")
+    @ResponseBody
+    public Datagrid showUsers(){
+
+        //从数据库中查询
+        List<SysUser> sysUsers = sysUserServiceBase.listObj(pageBean);
+
+        Datagrid datagrid = new Datagrid();
+        datagrid.setTotal(pageBean.getTotalRecord());
+        datagrid.setRows(sysUsers);
+
+        return datagrid;
+    }
 
 
 }

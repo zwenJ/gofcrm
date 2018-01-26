@@ -112,7 +112,8 @@ public class AuthController extends ParentController {
             AuthTree authTree = new AuthTree();
             authTree.setId(sysAuthority.getAuthId());
             authTree.setText(sysAuthority.getAuthText());
-            authTree.setUrl(sysAuthority.getAuthUrl());
+            //设置Tree对应的视图
+            authTree.getAttributes().setAuthUrl(sysAuthority.getAuthUrl());
             authTree.setIconCls(sysAuthority.getAuthImage());
             //如果其是一个分支的根（文件夹）（表明其权限下还有子权限）
             if (sysAuthority.getAuthType().equalsIgnoreCase(AuthType.FOLDER+"")){
@@ -124,6 +125,8 @@ public class AuthController extends ParentController {
                 authTree.setChildren(getAuthTreeList(sysAuthoritiesChild, userName));
                 //文件夹默认不打开
                 authTree.setState("closed");
+                //文件夹点击不能加载视图
+                authTree.getAttributes().setAuthType(AuthType.FOLDER+"");
             }
             authTreeList.add(authTree);
         }

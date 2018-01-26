@@ -1,5 +1,7 @@
 package com.zking.gofcrm.authority.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zking.gofcrm.authority.mapper.SysRoleMapper;
 import com.zking.gofcrm.authority.mapper.SysUserMapper;
 import com.zking.gofcrm.authority.model.CrmIdSufUtil;
@@ -106,7 +108,13 @@ public class UserServiceImpl implements IBaseService<SysUser>, IUserService {
      * @return
      */
     public List<SysUser> listObj(PageBean pageBean) {
-        return null;
+
+        PageHelper.startPage(pageBean.getCurPage(), pageBean.getMaxPageNumber());
+        List<SysUser> sysUserList = sysUserMapper.selectByPrimaryKey(null);
+        PageInfo pageInfo = new PageInfo(sysUserList);
+        pageBean.setTotalRecord((int) pageInfo.getTotal());
+
+        return pageInfo.getList();
     }
 
     /**

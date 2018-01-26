@@ -2,6 +2,7 @@ package com.zking.gofcrm.authority.mapper;
 
 import com.zking.gofcrm.authority.model.SysUser;
 
+import java.util.List;
 import java.util.Map;
 
 public interface SysUserMapper {
@@ -10,7 +11,12 @@ public interface SysUserMapper {
 
     int insert(SysUser record);
 
-    SysUser selectByPrimaryKey(String userId);
+    /**
+     * 获取用户的集合
+     * @param map
+     * @return
+     */
+    List<SysUser> selectByPrimaryKey(Map<String, Object> map);
 
     /**
      * 根据条件查询一个用户

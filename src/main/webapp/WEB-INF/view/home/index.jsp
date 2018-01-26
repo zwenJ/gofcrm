@@ -10,7 +10,7 @@
 <html>
 <head>
     <base href="<%@include file="../../../common/basehead.jsp"%>"/>
-    <title>蓝科权限管理系统</title>
+    <title>蓝科客户关系管理系统</title>
     <meta charset="UTF-8">
     <!-- easyUI样式信息 -->
     <%@include file="../../../common/base"%>
@@ -21,12 +21,7 @@
         <tr>
             <td rowspan="2"><img src="images/user.png" style="width: 50px;height: 50px;" /></td>
             <td>
-                <shiro:hasAnyRoles name="sysroot">
-                    <strong>超级管理员</strong>
-                </shiro:hasAnyRoles>
-                <shiro:hasAnyRoles name="sysmanager">
-                    <strong>管理员</strong>
-                </shiro:hasAnyRoles>
+                <strong><shiro:principal/></strong>
             </td>
         </tr>
         <tr>
@@ -34,6 +29,7 @@
                 <span class="left">
                     <a href="user/logout">退出</a>
                 </span>
+                <span>&nbsp;|&nbsp;</span>
                 <span class="right">
                     <a href="javascript:loadWin('个人配置','shiro/site/config.action')">配置</a>
                 </span>

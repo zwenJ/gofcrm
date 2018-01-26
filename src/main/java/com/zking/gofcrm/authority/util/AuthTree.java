@@ -10,14 +10,54 @@ import java.util.List;
  */
 public class AuthTree {
 
+    /**
+     * 树的编号
+     */
     private String id;
+
+    /**
+     * 树的标题
+     */
     private String text;
+
+    /**
+     * 树的图标
+     */
     private String iconCls;
+
+    /**
+     * 树对应的url
+     */
     private String url;
+
+    /**
+     * 树是否被选中
+     */
     private boolean checked;
+
+    /**
+     * 树的状态 open为打开 ，closed为关闭
+     */
     private String state;
+
+    /**
+     * 树的子节点
+     */
     private List<AuthTree> children;
 
+    /**
+     * 添加给树的自定义属性
+     */
+    private TreeProper attributes = new TreeProper();
+
+
+    public TreeProper getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(TreeProper attributes) {
+        this.attributes = attributes;
+    }
 
     public String getUrl() {
         return url;

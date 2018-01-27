@@ -79,7 +79,7 @@
 <body>
 <div class="tac">
     <div class="tac" style="margin-top: 6%;">&nbsp;</div>
-    <form id="form_login" method="post" action="/gofcrm/user/login" onsubmit="return form_validate();" >
+    <form id="form_login" method="post" action="/gofcrm/user/login">
         <div class="tac"><img src="/gofcrm/images/logo.png" width="185px;"></div>
         <div class="radius">
             <table class="form divform">
@@ -99,8 +99,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <!--<a class="easyui-linkbutton submitbtn" style="display: block;background: #298ECE;color: #FFF;">提&nbsp;&nbsp;交</a>-->
-                        <input type="submit" style="display: block;background: #298ECE;color: #FFF;" value="登陆"/>
+                        <a class="easyui-linkbutton submitbtn"onclick="form_login()" style="display: block;background: #298ECE;color: #FFF;">登&nbsp;&nbsp;陆</a>
+                        <!--<input type="submit" style="display: block;background: #298ECE;color: #FFF;" value="登陆"/>-->
                     </td>
                 </tr>
             </table>
@@ -127,9 +127,6 @@
     });
     function form_login() {
         $('#form_login').form("submit");
-    }
-    function form_validate(){
-        return $("#form_login").form("validate")
     }
 </script>
 </body>

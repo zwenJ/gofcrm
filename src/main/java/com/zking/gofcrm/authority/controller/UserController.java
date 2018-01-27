@@ -1,5 +1,6 @@
 package com.zking.gofcrm.authority.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.zking.gofcrm.authority.model.SysUser;
 import com.zking.gofcrm.common.controller.ParentController;
 import com.zking.gofcrm.common.service.IBaseService;
@@ -99,7 +100,6 @@ public class UserController extends ParentController {
         Datagrid datagrid = new Datagrid();
         datagrid.setTotal(pageBean.getTotalRecord());
         datagrid.setRows(sysUsers);
-
         return datagrid;
     }
 

@@ -12,6 +12,8 @@
         url:'user/show',
         fitColumns:true,
         pagination:true,
+        pageSize:2,
+        pageList:[2,4,6],
         columns:[[
             {field:'userId',title:'编号',width:100},
             {field:'userName',title:'姓名',width:100},

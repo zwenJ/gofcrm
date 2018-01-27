@@ -23,14 +23,7 @@
             {field:'roleDesc',title:'描述',width:100},
             {field:'roleFlag',title:'状态',width:100},
             {field:'cz',title:'操作',width:100,align:'right'}
-        ]],
-        toolbar: [{
-            iconCls: 'icon-add',
-            handler: function(){alert('添加角色')}
-        },'-',{
-            iconCls: 'icon-help',
-            handler: function(){alert('需要帮助')}
-        }]
+        ]]
     });
 </script>
 </body>

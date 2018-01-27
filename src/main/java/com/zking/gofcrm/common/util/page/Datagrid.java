@@ -12,7 +12,7 @@ import java.util.List;
 public class Datagrid {
 
     /**
-     * 查询的行数
+     * 查询的总记录数
      */
     private int total;
 
@@ -37,4 +37,5 @@ public class Datagrid {
     public void setRows(List rows) {
         this.rows = rows;
     }
+
 }

@@ -45,30 +45,34 @@ public class PageAspect {
         Object[] args = null;
         Object proceed = null;
         PageBean pageBean = null;
-        Page<Object> page = null;
 
         //获取切入点方法的参数
         args = point.getArgs();
+
         //获取分页参数
-        pageBean = (PageBean) args[0];
+        //获取参数的时候先判断该参数是否是 PageBean
+        if (args[0] instanceof PageBean) {
+            pageBean = (PageBean) args[0];
+        }
 
         //询问是否需要分页
-        if (pageBean.isPaginate()) {
+        if (null != pageBean && pageBean.isPaginate()) {
             // TODO: 2018/1/27 后续还要处理查询的参数
-
             //开始分页
-            page = PageHelper.startPage(pageBean.getCurPage(), pageBean.getMaxPageNumber());
+            PageHelper.startPage(pageBean.getCurPage(), pageBean.getPageRecord());
         }
 
         /**
          * 环绕通知 前后 的分界线
+         * proceed 可理解为切入点方法的返回参数
          */
-        proceed = point.proceed();
+        proceed = point.proceed(args);
 
         //依然询问是否需要分页
-        if (pageBean.isPaginate()) {
+        if (null != pageBean && pageBean.isPaginate()) {
             //处理分页数据的后续
-            pageBean.setTotalRecord((int) page.getTotal());
+            PageInfo pageInfo = new PageInfo((List) proceed);
+            pageBean.setTotalRecord((int) pageInfo.getTotal());
         }
 
         logger.debug("分页的环绕通知---结束");

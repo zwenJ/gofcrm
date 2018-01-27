@@ -15,32 +15,42 @@
     <br/>
     <br/>
     <br/>
-  <c:form action="#" modelAttribute="sysRole">
-      <table align="center" style="align-content: center;width: 100%">
-          <tr>
-              <td style="text-align: right;width: 50%">
-                  <strong>职位名称：</strong>
-              </td>
-              <td style="text-align: left;width: 50%">
-                  <c:input path="roleName" class="easyui-textbox" />
-              </td>
-          </tr>
-          <tr>
-              <td style="text-align: right;width: 50%">
-                  <strong>职位描述：</strong>
-              </td>
-              <td style="text-align: left;width: 50%">
-                  <c:input path="roleDesc" class="easyui-textbox" />
-              </td>
-          </tr>
-          <tr>
-              <td colspan="2" style="text-align: center">
-                  <input type="submit" value="提交">
-                  &nbsp;|&nbsp;
-                  <input type="reset" value="清空">
-              </td>
-          </tr>
-      </table>
-  </c:form>
+    <div style="width: 50%;float: left">
+        <c:form action="#" modelAttribute="sysRole">
+            <table align="center" style="align-content: center;width: 100%">
+                <tr>
+                    <td style="text-align: right;width: 50%">
+                        <strong>职位名称：</strong>
+                    </td>
+                    <td style="text-align: left;width: 50%">
+                        <c:input path="roleName" class="easyui-textbox" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 50%">
+                        <strong>职位描述：</strong>
+                    </td>
+                    <td style="text-align: left;width: 50%">
+                        <c:input path="roleDesc" class="easyui-textbox" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <input type="submit" value="提交">
+                        &nbsp;|&nbsp;
+                        <input type="reset" value="清空">
+                    </td>
+                </tr>
+            </table>
+        </c:form>
+    </div>
+    <div style="width: 50%;float: right">
+        <div style="width: 50%;float: left; border:2px solid #a1a1a1;">
+            <strong>职位所属模块</strong><br>
+        </div>
+        <div style="width: 50%;float: right;">
+            <strong>模块权限</strong><br>
+        </div>
+    </div>
 </body>
 </html>

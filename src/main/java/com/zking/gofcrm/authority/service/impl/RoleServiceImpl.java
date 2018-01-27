@@ -1,8 +1,7 @@
 package com.zking.gofcrm.authority.service.impl;
 
-import com.zking.gofcrm.authority.mapper.SysAuthorityMapper;
-import com.zking.gofcrm.authority.model.SysAuthority;
-import com.zking.gofcrm.authority.service.IAuthService;
+import com.zking.gofcrm.authority.mapper.SysRoleMapper;
+import com.zking.gofcrm.authority.model.SysRole;
 import com.zking.gofcrm.common.service.IBaseService;
 import com.zking.gofcrm.common.util.page.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,40 +11,26 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 说明：权限Service层
+ * 说明：略
  *
  * @author Jzw
- * @date 2018/1/21 20:35
+ * @date 2018/1/27 10:12
  */
-@Service(value = "AuthServiceImpl")
-public class AuthServiceImpl implements IBaseService<SysAuthority>, IAuthService {
+@Service("RoleServiceImpl")
+public class RoleServiceImpl implements IBaseService<SysRole> {
 
 
     @Autowired
-    private SysAuthorityMapper sysAuthorityMapper;
-
-    /**
-     * 根据参数查询用户权限集合
-     * userName
-     * authParentId
-     * authType
-     *
-     * @param map
-     * @return
-     */
-    public List<SysAuthority> listAuth(Map<String, Object> map) {
-        List<SysAuthority> sysAuthorities = sysAuthorityMapper.selectMap(map);
-        return sysAuthorities;
-    }
+    private SysRoleMapper sysRoleMapper;
 
 
     /**
      * 通用增加的方法，传入对象，返回true/false
      *
-     * @param sysAuthority
+     * @param sysRole
      * @return
      */
-    public boolean addObj(SysAuthority sysAuthority) {
+    public boolean addObj(SysRole sysRole) {
         return false;
     }
 
@@ -62,10 +47,10 @@ public class AuthServiceImpl implements IBaseService<SysAuthority>, IAuthService
     /**
      * 通用编辑（修改）方法，传入要修改的对象（必须保证要有主键(id)）
      *
-     * @param sysAuthority
+     * @param sysRole
      * @return
      */
-    public boolean editObj(SysAuthority sysAuthority) {
+    public boolean editObj(SysRole sysRole) {
         return false;
     }
 
@@ -75,13 +60,8 @@ public class AuthServiceImpl implements IBaseService<SysAuthority>, IAuthService
      * @param pageBean
      * @return
      */
-    public SysAuthority loadObj(PageBean pageBean) {
-
-        Map<String, String[]> parameterMap = pageBean.getParameterMap();
-
-        SysAuthority sysAuthority = sysAuthorityMapper.selectByPrimaryKey(parameterMap.get("authId")[0]);
-
-        return sysAuthority;
+    public SysRole loadObj(PageBean pageBean) {
+        return null;
     }
 
     /**
@@ -90,8 +70,11 @@ public class AuthServiceImpl implements IBaseService<SysAuthority>, IAuthService
      * @param pageBean
      * @return
      */
-    public List<SysAuthority> listObj(PageBean pageBean) {
-        return null;
+    public List<SysRole> listObj(PageBean pageBean) {
+
+        List<SysRole> sysRoleList = sysRoleMapper.selectMapAll(null);
+
+        return sysRoleList;
     }
 
     /**
@@ -105,5 +88,4 @@ public class AuthServiceImpl implements IBaseService<SysAuthority>, IAuthService
     public boolean doAssignment(Map<String, Object> map) {
         return false;
     }
-
 }

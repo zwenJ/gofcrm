@@ -1,6 +1,6 @@
 package com.zking.gofcrm.common.service;
 
-import com.zking.gofcrm.common.util.PageBean;
+import com.zking.gofcrm.common.util.page.PageBean;
 
 import java.util.List;
 import java.util.Map;

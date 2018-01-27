@@ -2,21 +2,17 @@ package com.zking.gofcrm.authority.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zking.gofcrm.authority.mapper.SysRoleMapper;
 import com.zking.gofcrm.authority.mapper.SysUserMapper;
-import com.zking.gofcrm.authority.model.CrmIdSufUtil;
 import com.zking.gofcrm.authority.model.SysUser;
 import com.zking.gofcrm.authority.service.IUserService;
 import com.zking.gofcrm.common.service.IBaseService;
 import com.zking.gofcrm.common.service.ICsfService;
-import com.zking.gofcrm.common.util.DateUtil;
-import com.zking.gofcrm.common.util.PageBean;
+import com.zking.gofcrm.common.util.page.PageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,12 +105,9 @@ public class UserServiceImpl implements IBaseService<SysUser>, IUserService {
      */
     public List<SysUser> listObj(PageBean pageBean) {
 
-        PageHelper.startPage(pageBean.getCurPage(), pageBean.getMaxPageNumber());
         List<SysUser> sysUserList = sysUserMapper.selectByPrimaryKey(null);
-        PageInfo pageInfo = new PageInfo(sysUserList);
-        pageBean.setTotalRecord((int) pageInfo.getTotal());
 
-        return pageInfo.getList();
+        return sysUserList;
     }
 
     /**

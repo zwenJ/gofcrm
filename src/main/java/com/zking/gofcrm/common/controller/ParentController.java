@@ -1,6 +1,6 @@
 package com.zking.gofcrm.common.controller;
 
-import com.zking.gofcrm.common.util.PageBean;
+import com.zking.gofcrm.common.util.page.PageBean;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,6 @@ public class ParentController {
 
     //PageBean 查询、分页工具类
     public PageBean pageBean;
-
 
     /**
      * 对基础数据的初始化方法

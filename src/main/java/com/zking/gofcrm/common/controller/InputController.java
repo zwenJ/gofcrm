@@ -1,5 +1,7 @@
 package com.zking.gofcrm.common.controller;
 
+import com.zking.gofcrm.authority.model.SysRole;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,11 +38,16 @@ public class InputController extends ParentController {
 
     @RequestMapping("/view/{dir}/{view}")
     public String toView(@PathVariable("dir") String dir,
-                         @PathVariable("view") String view) {
+                         @PathVariable("view") String view,
+                         Model model) {
 
         //权限认证
         if (!subject.hasRole("yguser")) {
             return "redirect:/html/index.html";
+        }
+
+        if ("addoredit_role".equalsIgnoreCase(view)){
+            model.addAttribute("sysRole",new SysRole());
         }
 
         return dir+"/"+view;

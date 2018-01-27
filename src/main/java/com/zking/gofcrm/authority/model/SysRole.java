@@ -181,8 +181,15 @@ public class SysRole implements Serializable {
      *
      * @mbg.generated
      */
-    public Integer getRoleFlag() {
-        return roleFlag;
+    public String getRoleFlag() {
+        switch (roleFlag){
+            case 0:
+                return "可用";
+            case 1:
+                return "不可用";
+            default:
+                return roleFlag.toString();
+        }
     }
 
     /**

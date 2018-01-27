@@ -3,15 +3,10 @@ package com.zking.gofcrm.authority.controller;
 import com.zking.gofcrm.authority.model.SysUser;
 import com.zking.gofcrm.common.controller.ParentController;
 import com.zking.gofcrm.common.service.IBaseService;
-import com.zking.gofcrm.common.util.Datagrid;
-import org.apache.http.HttpRequest;
-import org.apache.shiro.SecurityUtils;
+import com.zking.gofcrm.common.util.page.Datagrid;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.mgt.SubjectFactory;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,7 +85,10 @@ public class UserController extends ParentController {
     }
 
 
-
+    /**
+     * 返回 用户 的集合
+     * @return
+     */
     @RequestMapping("/show")
     @ResponseBody
     public Datagrid showUsers(){

@@ -1,4 +1,4 @@
-package com.zking.gofcrm.common.util;
+package com.zking.gofcrm.common.util.page;
 
 import java.util.ArrayList;
 import java.util.List;

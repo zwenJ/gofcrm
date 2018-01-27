@@ -1,4 +1,6 @@
-package com.zking.gofcrm.common.util;
+package com.zking.gofcrm.common.util.page;
+
+import com.zking.gofcrm.common.util.page.PageBean;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;

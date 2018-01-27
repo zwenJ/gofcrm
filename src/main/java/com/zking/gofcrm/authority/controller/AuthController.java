@@ -6,6 +6,7 @@ import com.zking.gofcrm.authority.util.AuthTree;
 import com.zking.gofcrm.common.config.AuthType;
 import com.zking.gofcrm.common.controller.ParentController;
 import com.zking.gofcrm.common.service.IBaseService;
+import com.zking.gofcrm.common.util.page.Datagrid;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -79,6 +80,20 @@ public class AuthController extends ParentController {
 
         //通知业务逻辑层查询获取
         return authBaseService.loadObj(pageBean).getAuthUrl();
+    }
+
+
+    /**
+     * 分会公司所有 职位（角色） 的集合
+     * @return
+     */
+    @RequestMapping("/show")
+    @ResponseBody
+    public List<Datagrid> showAuth() {
+
+
+
+        return null;
     }
 
 

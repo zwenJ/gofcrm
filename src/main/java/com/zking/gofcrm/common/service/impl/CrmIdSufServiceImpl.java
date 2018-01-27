@@ -2,17 +2,12 @@ package com.zking.gofcrm.common.service.impl;
 
 import com.zking.gofcrm.authority.mapper.CrmIdSufUtilMapper;
 import com.zking.gofcrm.authority.model.CrmIdSufUtil;
-import com.zking.gofcrm.common.service.IBaseService;
 import com.zking.gofcrm.common.service.ICsfService;
 import com.zking.gofcrm.common.util.DateUtil;
-import com.zking.gofcrm.common.util.PageBean;
-import org.apache.commons.collections.SortedBidiMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 说明：动态主键后缀业务

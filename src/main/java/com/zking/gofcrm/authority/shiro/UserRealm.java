@@ -4,8 +4,6 @@ import com.zking.gofcrm.authority.model.SysAuthority;
 import com.zking.gofcrm.authority.model.SysRole;
 import com.zking.gofcrm.authority.model.SysUser;
 import com.zking.gofcrm.authority.service.IUserService;
-import com.zking.gofcrm.common.service.IBaseService;
-import com.zking.gofcrm.common.util.PageBean;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -16,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 
 /**

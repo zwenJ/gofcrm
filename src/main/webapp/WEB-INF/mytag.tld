@@ -10,7 +10,7 @@
 
 	<tag>
 		<name>page</name>
-		<tag-class>com.zking.gofcrm.common.util.PageTag</tag-class>
+		<tag-class>com.zking.gofcrm.common.util.page.PageTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>pageBean</name>

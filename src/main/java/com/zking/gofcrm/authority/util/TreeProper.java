@@ -21,6 +21,20 @@ public class TreeProper {
     private String authUrl;
 
 
+    /**
+     * 树所属的父编号
+     */
+    private String authParentId;
+
+
+    public String getAuthParentId() {
+        return authParentId;
+    }
+
+    public void setAuthParentId(String authParentId) {
+        this.authParentId = authParentId;
+    }
+
     public String getAuthType() {
         return authType;
     }

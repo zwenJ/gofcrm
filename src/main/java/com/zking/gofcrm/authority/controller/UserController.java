@@ -100,6 +100,7 @@ public class UserController extends ParentController {
         Datagrid datagrid = new Datagrid();
         datagrid.setTotal(pageBean.getTotalRecord());
         datagrid.setRows(sysUsers);
+
         return datagrid;
     }
 

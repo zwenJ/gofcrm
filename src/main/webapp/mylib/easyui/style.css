@@ -93,3 +93,29 @@ textarea{
     font-size: 12px !important;
 }
 
+/*查询表单样式*/
+.query_form_table{
+    width:100%;
+    border-collapse:collapse;
+    border-top:solid 1px #666;
+    border-bottom:solid 1px #666;
+}
+
+.query_form_table th{
+    font-size:12px;
+    font-weight:normal;
+    border-bottom:solid 1px #8c8c8c;
+    background-color:#6EC2FD;
+    font-weight:400;
+    font-size:13px;
+    color:#000;
+    height:30px;
+    width:15%;
+}
+.query_form_table td{
+    background-color:#eeeeff;
+    border-bottom:solid 1px #8c8c8c;
+    border-left:solid 1px #fff;
+    width:18%;
+}
+

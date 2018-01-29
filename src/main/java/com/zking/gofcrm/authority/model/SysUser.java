@@ -179,15 +179,8 @@ public class SysUser implements Serializable {
      *
      * @mbg.generated
      */
-    public String getUserFlag() {
-        switch (userFlag){
-            case 0:
-                return "可用";
-            case 1:
-                return "不可用";
-            default:
-                return userFlag.toString();
-        }
+    public Integer getUserFlag() {
+        return userFlag;
     }
 
     /**

@@ -33,7 +33,11 @@
       LEFT JOIN role_authority as Y ON Y.role_id = B.role_id
       LEFT JOIN sys_authority as C ON C.auth_id = Y.auth_id
       WHERE A.user_name = #{userName, jdbcType=VARCHAR}
-      AND C.auth_parent_id = #{authParentId, jdbcType=VARCHAR}
+      <!-- 父权限编号 -->
+      <if test="authParentId != null and authParentId != ''">
+        AND C.auth_parent_id = #{authParentId, jdbcType=VARCHAR}
+      </if>
+      <!-- 权限类型 -->
       <if test="authType != null and authType != ''">
         AND C.auth_type = #{authType, jdbcType=VARCHAR}
       </if>

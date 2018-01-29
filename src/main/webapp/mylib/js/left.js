@@ -33,12 +33,26 @@ $(function(){
             //在其内部生成树
             $("ul[name='accordion_tree_"+title+"']").tree({
                 url:"auth/tree?apId="+auth_id_sz[index],
+
                 onClick:function (node) {
 
+                    /**
+                     * 用于判断用户是否已经登陆
+                     */
+                    $.post("to/isLogin",{
+                        id:1
+                    },function(data){
+                        console.log(data);
+                        //如果没有登陆则，给你重定向到index.html页面
+                        if ("error" == data.trim()) {
+                            location.href = "html/index.html";
+                        }
+                    });
+
                     if ("FOLDER" != node.attributes.authType){
+
                         //根据选项卡的“标题”/“索引”来判断这个选项卡是否存在
                         var tbas_select = $("#sys_tab").tabs("exists",node.text);
-
                         //如果存在
                         if (tbas_select) {
                             //则直接选中这个选项卡
@@ -56,12 +70,8 @@ $(function(){
                             });
                         }
                     }
-
                 }
             });
         }
     });
-
-
-
 });

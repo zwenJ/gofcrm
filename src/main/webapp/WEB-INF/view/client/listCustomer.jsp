@@ -8,21 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
-    <base href="<%@include file="../../../common/basehead.jsp"%>"/>
-    <title>客户关系管理系统--客户信息</title>
-    <link href="images/favicon.ico" rel="icon" type="image/x-icon" />
-    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <title>客户关系管理系统-后台管理</title>
-    <!-- Jquery 支持库 -->
-    <script type="text/javascript" src="mylib/jquery/jquery-3.2.1.js"></script>
-    <!-- Easyui 支持库 -->
-    <script type="text/javascript" src="mylib/easyui/jquery-easyui-1.5.3/jquery.easyui.min.js"></script>
-    <!-- Easyui 样式支持库-->
-    <link rel="stylesheet" type="text/css" href="mylib/easyui/jquery-easyui-1.5.3/themes/default/easyui.css" />
-    <link rel="stylesheet" type="text/css" href="mylib/easyui/jquery-easyui-1.5.3/themes/icon.css" />
-
-    <!--自定义样式-->
-    <link rel="stylesheet" type="text/css" href="style/style.css"/>
 
 </head>
 <body>
@@ -48,7 +33,7 @@
 
 <div id="tb">
     <div class="button_bar">
-        <button class="common_button" onclick="help('客户管理系统');">帮助</button>
+        <button class="common_button" onclick="fun_jljl()">帮助</button>
         <button class="common_button" onclick="doSearch()">查询</button>
     </div>
     <script>
@@ -61,6 +46,11 @@
                 sysUserName: $('#sysUserName').val(),
                 custLevelLabel: $('#custLevelLabel').val()
             });
+        }
+        function fun_jljl(){
+            var tab = $('#sys_tab').tabs('getSelected');
+            // 获取选择的面板
+            tab.panel('refresh', 'to/view/client/listActivity');
         }
     </script>
     <table class="query_form_table">

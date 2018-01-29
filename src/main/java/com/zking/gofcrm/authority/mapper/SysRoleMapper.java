@@ -62,4 +62,20 @@ public interface SysRoleMapper {
      */
     List<SysRole> selectMapAll(Map<String, Object> map);
 
+
+    /**
+     * 角色 权限 联表查询
+     * @param map
+     * @return
+     */
+    List<SysRole> selectMapRA(Map<String, Object> map);
+
+
+    /**
+     * 新增角色对应的权限信息
+     * @param map
+     * @return
+     */
+    int insertRoleAuth(Map<String, String> map);
+
 }

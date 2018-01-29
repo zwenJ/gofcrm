@@ -51,7 +51,6 @@ public class AuthController extends ParentController {
         return getAuthList(apId, at);
     }
 
-
     /**
      * 获取 权限信息 生成的一个 tree json数据结构
      * @param apId
@@ -68,34 +67,6 @@ public class AuthController extends ParentController {
 
         return authTreeList;
     }
-
-
-    /**
-     * 前端的不同权限对应的不同视图，根据权限的 ID 在数据库中获取
-     * @param authId
-     * @return
-     */
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String getView(@ModelAttribute("authId") String authId){
-
-        //通知业务逻辑层查询获取
-        return authBaseService.loadObj(pageBean).getAuthUrl();
-    }
-
-
-    /**
-     * 分会公司所有 职位（角色） 的集合
-     * @return
-     */
-    @RequestMapping("/show")
-    @ResponseBody
-    public List<Datagrid> showAuth() {
-
-
-
-        return null;
-    }
-
 
     /**
      * 查询获取一个权限集合
@@ -129,6 +100,8 @@ public class AuthController extends ParentController {
             authTree.setText(sysAuthority.getAuthText());
             //设置Tree对应的视图
             authTree.getAttributes().setAuthUrl(sysAuthority.getAuthUrl());
+            //设置Tree对应的父节点编号
+            authTree.getAttributes().setAuthParentId(sysAuthority.getAuthParentId());
             authTree.setIconCls(sysAuthority.getAuthImage());
             //如果其是一个分支的根（文件夹）（表明其权限下还有子权限）
             if (sysAuthority.getAuthType().equalsIgnoreCase(AuthType.FOLDER+"")){

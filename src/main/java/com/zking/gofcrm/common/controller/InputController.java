@@ -1,10 +1,10 @@
 package com.zking.gofcrm.common.controller;
 
 import com.zking.gofcrm.authority.model.SysRole;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 说明：略
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/to", method = RequestMethod.GET)
 public class InputController extends ParentController {
 
-
+    private Logger logger = LoggerFactory.getLogger(InputController.class);
 
     /**
      * 进入首页的入口 /WEB-INF/view/index1.jsp
@@ -51,6 +51,19 @@ public class InputController extends ParentController {
         }
 
         return dir+"/"+view;
+    }
+
+
+    @RequestMapping(value = "/isLogin", method = RequestMethod.POST)
+    @ResponseBody
+    public String isUserLogin(@ModelAttribute("id") String id){
+        logger.debug("请求判断用户是否登陆",id);
+        if (!subject.hasRole("yguser")) {
+            logger.debug("未登陆，或登陆失效");
+            return "error";
+        }
+        logger.debug("已登录");
+        return "success";
     }
 
 

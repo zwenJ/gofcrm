@@ -1,5 +1,6 @@
 package com.zking.gofcrm.authority.model;
 
+import com.zking.gofcrm.authority.util.AuthTree;
 import org.apache.ibatis.type.Alias;
 import org.springframework.stereotype.Component;
 
@@ -75,7 +76,6 @@ public class SysRole implements Serializable {
      * 角色的功能
      */
     private List<SysFunction> functionList = new ArrayList<SysFunction>();
-
 
     public String getRoleAlias() {
         return roleAlias;
@@ -181,15 +181,8 @@ public class SysRole implements Serializable {
      *
      * @mbg.generated
      */
-    public String getRoleFlag() {
-        switch (roleFlag){
-            case 0:
-                return "可用";
-            case 1:
-                return "不可用";
-            default:
-                return roleFlag.toString();
-        }
+    public Integer getRoleFlag() {
+        return roleFlag;
     }
 
     /**

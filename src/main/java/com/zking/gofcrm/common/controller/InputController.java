@@ -36,6 +36,13 @@ public class InputController extends ParentController {
     }
 
 
+    /**
+     * 获取相应的视图资源
+     * @param dir
+     * @param view
+     * @param model
+     * @return
+     */
     @RequestMapping("/view/{dir}/{view}")
     public String toView(@PathVariable("dir") String dir,
                          @PathVariable("view") String view,
@@ -54,6 +61,11 @@ public class InputController extends ParentController {
     }
 
 
+    /**
+     * 用于确定用户是否已经登陆
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/isLogin", method = RequestMethod.POST)
     @ResponseBody
     public String isUserLogin(@ModelAttribute("id") String id){

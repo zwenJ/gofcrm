@@ -151,7 +151,6 @@
 		<logger name="com.opensymphony.xwork2" level="ERROR" />
 		<logger name="org.jboss" level="ERROR" />
 
-
 		<!-- 配置日志的根节点 -->
 		<root level="all">
 			<appender-ref ref="Console" />

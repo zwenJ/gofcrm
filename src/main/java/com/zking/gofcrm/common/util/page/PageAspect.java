@@ -3,6 +3,7 @@ package com.zking.gofcrm.common.util.page;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zking.gofcrm.common.util.annotation.MyPage;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -45,6 +48,24 @@ public class PageAspect {
         Object[] args = null;
         Object proceed = null;
         PageBean pageBean = null;
+
+//        Object target = point.getTarget();//获取切入点所在的对象
+//        //获取切入点所在的方法
+//        Method listObj = target.getClass().getDeclaredMethod("listObj", PageBean.class);
+//        //判断该切入点是否存在 @MyPage 注解
+//        if (listObj.isAnnotationPresent(MyPage.class)) {
+//            logger.debug("测试：该切入点存在该注解");
+//            //判断是否需要开启分页
+//            if (listObj.getAnnotation(MyPage.class).isPage()) {
+//                logger.debug("测试：该切入点需要分页");
+//            }
+//            else {
+//                logger.debug("测试：该切入点不需要分页");
+//            }
+//        }
+//        else {
+//            logger.debug("测试：该切入点不存在该注解");
+//        }
 
         //获取切入点方法的参数
         args = point.getArgs();

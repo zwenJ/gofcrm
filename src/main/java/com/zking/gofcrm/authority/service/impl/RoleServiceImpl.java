@@ -5,6 +5,7 @@ import com.zking.gofcrm.authority.model.SysRole;
 import com.zking.gofcrm.authority.service.IRoleService;
 import com.zking.gofcrm.common.service.IBaseService;
 import com.zking.gofcrm.common.service.ICsfService;
+import com.zking.gofcrm.common.util.annotation.MyPage;
 import com.zking.gofcrm.common.util.page.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,9 +76,9 @@ public class RoleServiceImpl implements IRoleService {
      * @param pageBean
      * @return
      */
+    // @MyPage(isPage = true) 我在切面中测试 自定义注解
     public List<SysRole> listObj(PageBean pageBean) {
         List<SysRole> sysRoleList = sysRoleMapper.selectMapAll(null);
-
         return sysRoleList;
     }
 

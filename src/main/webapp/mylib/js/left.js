@@ -50,28 +50,41 @@ $(function(){
                     });
 
                     if ("FOLDER" != node.attributes.authType){
-
-                        //根据选项卡的“标题”/“索引”来判断这个选项卡是否存在
-                        var tbas_select = $("#sys_tab").tabs("exists",node.text);
-                        //如果存在
-                        if (tbas_select) {
-                            //则直接选中这个选项卡
-                            $("#sys_tab").tabs("select",node.text);
-                        }
-                        //如果不存在
-                        else {
-                            //则生成这个选项卡
-                            //点击不同的tree节点，生成不同的功能选项卡
-                            $("#sys_tab").tabs("add",{
-                                title:node.text,
-                                fit:true,
-                                href:'to/view/'+node.attributes.authUrl,
-                                closable:true,
-                            });
-                        }
+                        //通知方法添加/选中选项卡
+                        add_tabs(node.text, node.attributes.authUrl);
                     }
                 }
             });
         }
     });
+
+
+
 });
+
+
+/**
+ * 添加/选中一个选项卡
+ * @param title  选项卡的标题
+ * @param view   选项卡中显示的视图
+ */
+function add_tabs(title, view){
+    //根据选项卡的“标题”/“索引”来判断这个选项卡是否存在
+    var tbas_select = $("#sys_tab").tabs("exists",title);
+    //如果存在
+    if (tbas_select) {
+        //则直接选中这个选项卡
+        $("#sys_tab").tabs("select",title);
+    }
+    //如果不存在
+    else {
+        //则生成这个选项卡
+        //点击不同的tree节点，生成不同的功能选项卡
+        $("#sys_tab").tabs("add",{
+            title:title,
+            fit:true,
+            href:'to/view/'+view,
+            closable:true,
+        });
+    }
+}

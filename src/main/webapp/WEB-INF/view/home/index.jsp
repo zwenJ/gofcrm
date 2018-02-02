@@ -47,7 +47,7 @@
     <div id="win_main_2" class="easyui-window" title=""
          data-options="modal:true,closed:true">
     </div>
-    <div class="easyui-tabs"  data-options="fit:'true'"  id="sys_tab"  >
+    <div id="sys_tab"  class="easyui-tabs"  data-options="fit:'true'">
     </div>
 
 </div>

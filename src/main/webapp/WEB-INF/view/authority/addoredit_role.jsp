@@ -31,7 +31,7 @@
                                  */
                                 $("#auth_div_ul").combotree({
                                     url:"auth/tree?apId=1",
-                                    width:300,
+                                    width:298,
                                     panelHeight:400,
                                     multiple:true,  //下拉框中定义是否支持多选的属性 true 支持多选
                                     checkbox:true,  //是否在每个节点之前显示复选框 true 显示多选框

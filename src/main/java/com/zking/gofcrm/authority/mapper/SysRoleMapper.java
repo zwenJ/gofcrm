@@ -62,6 +62,13 @@ public interface SysRoleMapper {
      */
     List<SysRole> selectMapAll(Map<String, Object> map);
 
+    /**
+     * 根据用户编号 查询 角色信息
+     * @param map
+     * @return
+     */
+    List<SysRole> selectByUserIdRole(Map<String, Object> map);
+
 
     /**
      * 角色 权限 联表查询

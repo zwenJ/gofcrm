@@ -23,7 +23,6 @@
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   </listener>
 
-
   <!-- ******************** 编码过滤器 ************************* -->
   <filter>
     <filter-name>encodingFilter</filter-name>
@@ -39,7 +38,6 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-
   <!-- Shiro过滤器 -->
   <filter>
     <filter-name>shiroFilterFactoryBean</filter-name>
@@ -49,7 +47,6 @@
     <filter-name>shiroFilterFactoryBean</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-
 
   <!-- ************************** SpringMVC  ************************** -->
   <servlet>
@@ -68,8 +65,6 @@
     <servlet-name>SpringMVC</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
-
 
   <!-- *************** 开始界面 ******************* -->
   <welcome-file-list>

@@ -71,8 +71,10 @@ public class SysUser implements Serializable {
     /**
      * 用户的角色
      */
-
     private List<SysRole> roleList = new ArrayList<SysRole>();
+
+
+    private String userRole;
 
     public SysUser() {
 
@@ -83,12 +85,28 @@ public class SysUser implements Serializable {
         this.userPwd = userPwd;
     }
 
+
+    public String getUserRole() {
+        return userRole;
+    }
+
     public List<SysRole> getRoleList() {
         return roleList;
     }
 
     public void setRoleList(List<SysRole> roleList) {
         this.roleList = roleList;
+
+        //将用户的角色转换成字符串
+        if (null != roleList && roleList.size() > 0) {
+            StringBuilder sb = new StringBuilder();
+            for (SysRole sysRole : roleList) {
+                sb.append(sysRole.getRoleName());
+                sb.append("、");
+            }
+            this.userRole = sb.toString();
+        }
+
     }
 
     public String getUserAddId() {

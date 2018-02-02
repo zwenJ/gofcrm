@@ -1,6 +1,7 @@
 package com.zking.gofcrm.authority.service;
 
 import com.zking.gofcrm.authority.model.SysUser;
+import com.zking.gofcrm.common.service.IBaseService;
 
 /**
  * 说明：用户扩展服务层接口
@@ -8,7 +9,7 @@ import com.zking.gofcrm.authority.model.SysUser;
  * @author Jzw
  * @date 2018/1/20 11:58
  */
-public interface IUserService {
+public interface IUserService extends IBaseService<SysUser> {
 
     /**
      * 用户登录

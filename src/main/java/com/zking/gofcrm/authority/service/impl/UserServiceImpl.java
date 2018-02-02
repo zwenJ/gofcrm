@@ -2,7 +2,9 @@ package com.zking.gofcrm.authority.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zking.gofcrm.authority.mapper.SysRoleMapper;
 import com.zking.gofcrm.authority.mapper.SysUserMapper;
+import com.zking.gofcrm.authority.model.SysRole;
 import com.zking.gofcrm.authority.model.SysUser;
 import com.zking.gofcrm.authority.service.IUserService;
 import com.zking.gofcrm.common.service.IBaseService;
@@ -24,12 +26,15 @@ import java.util.Map;
  * @date 2018/1/17 14:11
  */
 @Service("UserServiceImpl")
-public class UserServiceImpl implements IBaseService<SysUser>, IUserService {
+public class UserServiceImpl implements IUserService {
 
     private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private SysRoleMapper roleMapper;
 
     @Autowired
     private ICsfService iCsfService;
@@ -106,6 +111,14 @@ public class UserServiceImpl implements IBaseService<SysUser>, IUserService {
     public List<SysUser> listObj(PageBean pageBean) {
 
         List<SysUser> sysUserList = sysUserMapper.selectByPrimaryKey(null);
+
+        //查询每个用户的角色
+        Map<String, Object> mapRole = new HashMap<String, Object>();
+        for (SysUser sysUser : sysUserList) {
+            mapRole.put("userId", sysUser.getUserId());
+            List<SysRole> sysRoleList = roleMapper.selectByUserIdRole(mapRole);
+            sysUser.setRoleList(sysRoleList);
+        }
 
         return sysUserList;
     }

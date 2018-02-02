@@ -5,6 +5,7 @@ import com.zking.gofcrm.authority.service.IRoleService;
 import com.zking.gofcrm.authority.util.AuthTree;
 import com.zking.gofcrm.common.controller.ParentController;
 import com.zking.gofcrm.common.service.IBaseService;
+import com.zking.gofcrm.common.util.combo.Combo;
 import com.zking.gofcrm.common.util.page.Datagrid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.management.relation.Role;
 import java.util.*;
 
 /**
@@ -36,23 +38,49 @@ public class RoleController extends ParentController {
     @Autowired
     private IRoleService roleBaseServiceImpl;
 
-
-
     /**
-     * 返回虽有角色（职位）信息
+     * 返回已有角色（职位）信息
      * @return
      */
     @RequestMapping("/show")
     public Datagrid showRole(){
 
-        //通知业务逻辑层查询
-        List<SysRole> sysRoleList = roleBaseServiceImpl.listObj(pageBean);
+        List<SysRole> sysRoleList = baseRoleList();
 
         Datagrid datagrid = new Datagrid();
         datagrid.setTotal(pageBean.getTotalRecord());
         datagrid.setRows(sysRoleList);
 
         return datagrid;
+    }
+
+
+    /**
+     * 获取用户角色集合
+     * 作为 下拉框数据集合返回
+     * @return
+     */
+    @RequestMapping("/combo")
+    public List<Combo> getCombo() {
+        List<Combo> comboList = null;
+        pageBean.setPaginate(false);  //不需要分页
+        List<SysRole> sysRoleList = baseRoleList();
+        if (null != sysRoleList && sysRoleList.size() > 0) {
+            comboList = new ArrayList<Combo>(sysRoleList.size()+1);
+            Combo comboBase = new Combo();
+            comboBase.setId(0+"");
+            comboBase.setText("全部");
+            comboBase.setSelected(true);
+            comboList.add(comboBase);
+            for (SysRole sysRole : sysRoleList) {
+                Combo combo = new Combo();
+                combo.setId(sysRole.getRoleId());
+                combo.setText(sysRole.getRoleName());
+                comboList.add(combo);
+            }
+        }
+
+        return comboList;
     }
 
 
@@ -102,5 +130,15 @@ public class RoleController extends ParentController {
         return "error";
     }
 
+
+    /**
+     * 通用查询角色集合
+     * @return
+     */
+    private List<SysRole> baseRoleList(){
+        //通知业务逻辑层查询
+        List<SysRole> sysRoleList = roleBaseServiceImpl.listObj(pageBean);
+        return sysRoleList;
+    }
 
 }

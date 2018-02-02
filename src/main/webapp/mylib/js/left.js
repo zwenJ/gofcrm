@@ -18,6 +18,7 @@ $(function(){
                 $("#accordion_div").accordion("add",{
                     title:n.authText,
                     selected: false,
+                    border:false,
                     iconCls: n.authImage,
                     content: "<ul name='accordion_tree_"+n.authText+"'></ul>"
                 });

@@ -10,6 +10,20 @@
     <result column="user_add_id" jdbcType="VARCHAR" property="userAddId"/>
   </resultMap>
 
+  <!-- 用户 角色 结果映射 -->
+  <resultMap id="ResultMapAB" type="sysUser">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+    <result column="user_flag" jdbcType="INTEGER" property="userFlag" />
+    <result column="user_add_id" jdbcType="VARCHAR" property="userAddId"/>
+    <!-- 针对用户的角色的映射 -->
+    <collection property="roleList" javaType="sysRole">
+      <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+      <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+    </collection>
+  </resultMap>
+
   <!-- 二表联查，结果映射 -->
   <resultMap id="ResultMapABC" type="sysUser">
     <id column="user_id" jdbcType="VARCHAR" property="userId" />
@@ -31,6 +45,11 @@
     user_id, user_name, user_pwd, user_flag, user_add_id
   </sql>
 
+  <!-- 查询用户信息 + 角色名称 -->
+  <sql id="User_RoleName_List">
+    A.user_id, A.user_name, A.user_pwd, A.user_flag, A.user_add_id,B.role_id, B.role_name
+  </sql>
+
   <sql id="Table_name_A">sys_user as A</sql>
   <sql id="Table_name_B">sys_role as B</sql>
   <sql id="Table_name_C">sys_authority as C</sql>
@@ -47,9 +66,9 @@
     C.auth_id, C.auth_parent_id, C.auth_type, C.auth_text, C.auth_url, C.auth_tip,
   </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map">
-    select 
-    <include refid="Base_Column_List" />
+  <!-- 获取用户的集合 -->
+  <select id="selectByPrimaryKey" resultMap="ResultMapAB" parameterType="map">
+    select <include refid="Base_Column_List"/>
     from sys_user
   </select>
 

@@ -79,7 +79,7 @@
             会报错的原因是：此处指定的应该是一个工程名称（基于Eclipse的工程），
             但是IDEA是没有工程的概念的，所以报错，但是不影响使用
          -->
-        <javaModelGenerator targetPackage="com.zking.gofcrm.authority.model"
+        <javaModelGenerator targetPackage="com.zking.gofcrm.dictionary.model"
                             targetProject="src/main/java">
             <!--  for MyBatis3/MyBatis3Simple
                 自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；
@@ -117,7 +117,7 @@
                 要生成XML的话，这个元素就必须配置
             targetPackage/targetProject:同javaModelGenerator
          -->
-        <sqlMapGenerator targetPackage="mapping/authority"
+        <sqlMapGenerator targetPackage="mapping/dictionary"
                          targetProject="src/main/resources">
             <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类
                  放在这个package下，默认为false
@@ -137,7 +137,7 @@
                 3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；
             注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER
         -->
-        <javaClientGenerator targetPackage="com.zking.gofcrm.authority.mapper"
+        <javaClientGenerator targetPackage="com.zking.gofcrm.dictionary.mapper"
                              type="XMLMAPPER"
                              targetProject="src/main/java">
             <!-- 是否在当前路径下新加一层schema,
@@ -235,8 +235,8 @@
                <!--enableUpdateByExample="false">-->
         <!--</table>-->
         <table schema="ssm_crm"
-            tableName="crm_id_suf"
-            domainObjectName="CrmIdSufUtil"
+            tableName="crm_dict"
+            domainObjectName="Dictionary"
             enableCountByExample="false"
             enableDeleteByExample="false"
             enableSelectByExample="false"

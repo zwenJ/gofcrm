@@ -11,6 +11,30 @@
     <title>职位-角色</title>
 </head>
 <body>
+
+<div id="tb">
+    <table class="query_form_table">
+        <tr>
+            <th>编号</th>
+            <td>
+                <input class="easyui-textbox" id="custId" name="custId" />
+            </td>
+            <th>名称</th>
+            <td>
+                <input class="easyui-textbox" id="custName" name="custName"/>
+            </td>
+            <th>是否可用</th>
+            <td>
+                <select id="custRegion" name="custRegion">
+                    <option value="">全部</option>
+                    <option value="0">可用</option>
+                    <option value="1">不可用</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
+
 <table id="role_table"></table>
 <script>
     $('#role_table').datagrid({
@@ -34,7 +58,14 @@
                 }
             }},
             {field:'cz',title:'操作',width:100,align:'right'}
-        ]]
+        ]],
+        toolbar: [{
+            iconCls: 'icon-search',
+            handler: function(){alert('查询按钮')}
+        },'-',{
+            iconCls: 'icon-help',
+            handler: function(){alert('帮助按钮')}
+        }]
     });
 </script>
 </body>

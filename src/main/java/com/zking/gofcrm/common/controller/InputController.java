@@ -78,5 +78,4 @@ public class InputController extends ParentController {
         return "success";
     }
 
-
 }

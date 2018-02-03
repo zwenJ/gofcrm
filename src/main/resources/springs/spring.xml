@@ -25,7 +25,10 @@
     <!--2)配置连接池-->
     <import resource="classpath:springs/spring-mybatis.xml"/>
 
-    <!--3)Shiro权限认证  -->
+    <!--3)Redis缓存数据库  -->
+    <import resource="classpath:springs/spring-redis.xml"/>
+
+    <!--4)Shiro权限认证  -->
     <import resource="classpath:springs/spring-shiro.xml"/>
 
 <!-- ************************** 四、事务 ******************** -->

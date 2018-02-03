@@ -196,4 +196,17 @@ public class SysRole implements Serializable {
     public void setRoleFlag(Integer roleFlag) {
         this.roleFlag = roleFlag;
     }
+
+    @Override
+    public String toString() {
+        return "SysRole{" +
+                "roleId='" + roleId + '\'' +
+                ", roleName='" + roleName + '\'' +
+                ", roleDesc='" + roleDesc + '\'' +
+                ", roleFlag=" + roleFlag +
+                ", roleAlias='" + roleAlias + '\'' +
+                ", authzList=" + authzList +
+                ", functionList=" + functionList +
+                '}';
+    }
 }

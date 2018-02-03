@@ -58,7 +58,12 @@
                 }},
                 {field:'userAddId',title:'添加人',width:100},
                 {field:'userRole',title:'职位',width:100},
-                {field:'cz',title:'操作',width:100,align:'right'}
+                {field:'cz',title:'操作',width:100,align:'right',formatter:function(value, row, index) {
+                    var buttons = "<a id='btn' href='#' class='easyui-linkbutton' data-options=\"iconCls:'icon-edit'\">编辑</a>";
+                        buttons += "&nbsp;|&nbsp;";
+                        buttons += "<a id='btn' href='#' class='easyui-linkbutton' data-options=\"iconCls:'icon-search'\">其他</a>";
+                    return buttons;
+                }}
             ]],
             toolbar: [{
                 iconCls: 'icon-search',

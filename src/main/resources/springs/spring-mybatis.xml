@@ -58,7 +58,7 @@
                 <!-- 使用SLF4J作为日志服务层 -->
                 <prop key="logImpl">SLF4J</prop>
                 <!-- 开启缓存 -->
-                <prop key="cacheEnabled">false</prop>
+                <prop key="cacheEnabled">true</prop>
                 <!-- 查询时，关闭关联对象即时加载以提高性能 -->
                 <prop key="lazyLoadingEnabled">false</prop>
                 <!-- 设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能 -->

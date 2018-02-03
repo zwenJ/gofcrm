@@ -8,6 +8,7 @@ package com.zking.gofcrm.common.config;
  */
 public enum AuthType {
 
+
     ROLE("ROLE"), FOLDER("FOLDER"), DOCUMENT("DOCUMENT");
 
     private String authType;

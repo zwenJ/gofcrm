@@ -60,7 +60,7 @@ public interface SysRoleMapper {
      * @param map
      * @return
      */
-    List<SysRole> selectMapAll(Map<String, Object> map);
+    List<SysRole> selectMapAll(Map<String, String[]> map);
 
     /**
      * 根据用户编号 查询 角色信息

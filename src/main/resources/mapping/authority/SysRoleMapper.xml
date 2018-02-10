@@ -46,7 +46,7 @@
   </select>
 
   <!-- 查询一个角色的集合 -->
-  <select id="selectMapAll" resultMap="BaseResultMap" parameterType="map" useCache="true">
+  <select useCache="true" id="selectMapAll" resultMap="BaseResultMap" parameterType="map">
     SELECT <include refid="Base_Column_List"/>
     FROM sys_role
     <trim prefix="WHERE" suffixOverrides="AND">

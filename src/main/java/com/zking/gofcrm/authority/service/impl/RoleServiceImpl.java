@@ -78,7 +78,9 @@ public class RoleServiceImpl implements IRoleService {
      */
     // @MyPage(isPage = true) 我在切面中测试 自定义注解
     public List<SysRole> listObj(PageBean pageBean) {
-        List<SysRole> sysRoleList = sysRoleMapper.selectMapAll(null);
+
+        List<SysRole> sysRoleList = sysRoleMapper.selectMapAll(pageBean.getParameterMap());
+
         return sysRoleList;
     }
 

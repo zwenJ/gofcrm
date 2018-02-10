@@ -68,7 +68,7 @@
     LEFT JOIN user_role as Z ON Z.user_id = B.user_id
     LEFT JOIN sys_role as A ON A.role_id = Z.role_id
     WHERE B.user_id = #{userId}
-    GROUP BY A.role_id ASC
+    ORDER BY A.role_id ASC
   </select>
 
   <!-- 插入角色对应的权限信息 -->

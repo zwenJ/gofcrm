@@ -97,6 +97,9 @@ public class UserController extends ParentController {
         //从数据库中查询
         List<SysUser> sysUsers = sysUserServiceBase.listObj(pageBean);
 
+        /**
+         * 返会数据网格
+         */
         Datagrid datagrid = new Datagrid();
         datagrid.setTotal(pageBean.getTotalRecord());
         datagrid.setRows(sysUsers);

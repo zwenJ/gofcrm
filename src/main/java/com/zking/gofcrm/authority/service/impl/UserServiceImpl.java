@@ -110,7 +110,7 @@ public class UserServiceImpl implements IUserService {
      */
     public List<SysUser> listObj(PageBean pageBean) {
 
-        List<SysUser> sysUserList = sysUserMapper.selectByPrimaryKey(null);
+        List<SysUser> sysUserList = sysUserMapper.selectByPrimaryKey(pageBean.getParameterMap());
 
         //查询每个用户的角色
         Map<String, Object> mapRole = new HashMap<String, Object>();

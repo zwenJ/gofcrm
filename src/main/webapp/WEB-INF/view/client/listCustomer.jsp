@@ -18,7 +18,6 @@
                          fitColumns:true,
                          toolbar:'#tb',
                          pagination:true">
-
     <thead>
     <tr>
         <th data-options="field:'custId',width:100,align:'center'">客户编号</th>

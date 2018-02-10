@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 说明：分页切面的配置
@@ -75,6 +77,21 @@ public class PageAspect {
         if (args[0] instanceof PageBean) {
             pageBean = (PageBean) args[0];
         }
+
+        //参数配置
+//        if (null != pageBean) {
+//            //获取PageBean中的所有参数集合
+//            Map<String, String[]> parameterMap = pageBean.getParameterMap();
+//            Map<String, Object>
+//            //获取参数 K 的集合
+//            Set<String> parameKeySet = parameterMap.keySet();
+//            for (String keys : parameKeySet) {
+//                //参数不是 分页用的参数 就放行
+//                if (!"page".equalsIgnoreCase(keys) & !"rows".equalsIgnoreCase(keys)) {
+//
+//                }
+//            }
+//        }
 
         //询问是否需要分页
         if (null != pageBean && pageBean.isPaginate()) {

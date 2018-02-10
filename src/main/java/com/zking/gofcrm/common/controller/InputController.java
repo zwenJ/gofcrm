@@ -1,6 +1,7 @@
 package com.zking.gofcrm.common.controller;
 
 import com.zking.gofcrm.authority.model.SysRole;
+import com.zking.gofcrm.authority.model.SysUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
@@ -55,6 +56,10 @@ public class InputController extends ParentController {
 
         if ("addoredit_role".equalsIgnoreCase(view)){
             model.addAttribute("sysRole",new SysRole());
+        }
+
+        if ("user_list".equalsIgnoreCase(view)) {
+            model.addAttribute("SysUser", new SysUser());
         }
 
         return dir+"/"+view;

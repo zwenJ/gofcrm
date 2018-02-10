@@ -68,8 +68,46 @@
 
   <!-- 获取用户的集合 -->
   <select id="selectByPrimaryKey" resultMap="ResultMapAB" parameterType="map">
-    select <include refid="Base_Column_List"/>
-    from sys_user
+    select
+    <trim suffixOverrides=",">
+      <include refid="Column_list_A"/>
+    </trim>
+    from <include refid="Table_name_A"/>
+    <!-- 如果需要连表查询 -->
+    <if test=" userRole != null ">
+      <if test=" userRole[0] != null and userRole[0] != '' and userRole[0] != 'all' ">
+        RIGHT JOIN user_role as Z ON A.user_id = Z.user_id
+      </if>
+    </if>
+    <!-- 查询条件拼接 -->
+    <trim prefix="WHERE" suffixOverrides="AND">
+      <if test=" userId != null ">
+        <!-- 根据用户编号查询 -->
+        <if test=" userId[0] != null and userId[0] !='' ">
+          A.user_id = #{userId[0]} AND
+        </if>
+        <if test=" userId[0] == null or userId[0] == '' ">
+          <!-- 根据用户姓名查询 -->
+          <if test=" userName != null ">
+            <if test=" userName[0] != null and userName[0] !='' ">
+              A.user_name LIKE '%${userName[0]}%' AND
+            </if>
+          </if>
+          <!-- 根据用户状态查询 -->
+          <if test=" userFlag != null ">
+            <if test=" userFlag[0] != null and userFlag[0] != '' and userFlag[0] != 3 ">
+              A.user_flag = #{userFlag[0]} AND
+            </if>
+          </if>
+          <!-- 如果需要连表查询 查询条件 -->
+          <if test=" userRole != null ">
+            <if test=" userRole[0] != null and userRole[0] != '' and userRole[0] != 'all' ">
+              Z.role_id = #{userRole[0]} AND
+            </if>
+          </if>
+        </if>
+      </if>
+    </trim>
   </select>
 
   <!-- 判断一个用户是否具有对 一个用户操作的 权限 -->

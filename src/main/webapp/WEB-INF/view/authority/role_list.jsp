@@ -25,7 +25,8 @@
             </td>
             <th>是否可用</th>
             <td>
-                <select id="custRegion" name="custRegion">
+                <select id="custRegion" name="custRegion"
+                        class="easyui-combobox" style="width:200px;">
                     <option value="">全部</option>
                     <option value="0">可用</option>
                     <option value="1">不可用</option>

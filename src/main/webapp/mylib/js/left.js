@@ -43,7 +43,6 @@ $(function(){
                     $.post("to/isLogin",{
                         id:1
                     },function(data){
-                        console.log(data);
                         //如果没有登陆则，给你重定向到index.html页面
                         if ("error" == data.trim()) {
                             location.href = "html/index.html";

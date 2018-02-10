@@ -16,7 +16,7 @@ public interface SysUserMapper {
      * @param map
      * @return
      */
-    List<SysUser> selectByPrimaryKey(Map<String, Object> map);
+    List<SysUser> selectByPrimaryKey(Map<String, String[]> map);
 
     /**
      * 根据条件查询一个用户

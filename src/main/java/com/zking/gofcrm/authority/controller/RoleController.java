@@ -68,7 +68,7 @@ public class RoleController extends ParentController {
         if (null != sysRoleList && sysRoleList.size() > 0) {
             comboList = new ArrayList<Combo>(sysRoleList.size()+1);
             Combo comboBase = new Combo();
-            comboBase.setId(0+"");
+            comboBase.setId("all");
             comboBase.setText("全部");
             comboBase.setSelected(true);
             comboList.add(comboBase);

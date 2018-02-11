@@ -22,16 +22,22 @@
             <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
         </div>
         <div id="datagrid_search_form">
-            编号: <input class="easyui-textbox" type="text" style="width:100px" id="userId" name="roleId"/>
-            名称: <input class="easyui-textbox" type="text" style="width:100px" id="userName" name="roleName"/>
-            状态：
-            <input id="role_flag" name="roleFlag"
-                   panelHeight="auto" style="width:100px" />
-            <a href="javascript:;" id="role_list_search_a" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+            <form id="role_search_form">
+                编号: <input class="easyui-textbox" type="text" style="width:100px" id="roleId" name="roleId"/>
+                名称: <input class="easyui-textbox" type="text" style="width:100px" id="roleName" name="roleName"/>
+                状态：
+                <input id="role_flag" name="roleFlag"
+                       panelHeight="auto" style="width:100px" />
+                <a href="javascript:;" id="search_a" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+                <a href="javascript:;" id="search_b" class="easyui-linkbutton" iconCls="icon-search">重置</a>
+            </form>
         </div>
     </div>
 
     <script>
+        /**
+         * 数据网格数据
+         */
         $('#role_table').datagrid({
             url:'role/show',
             fitColumns:true,   //表格大小是否适应父容器
@@ -70,15 +76,29 @@
         /**
          * 查询按钮点击事件
          */
-        $("#role_list_search_a").click(function(){
+        $("#search_a").click(function(){
             var role_id = $("#roleId").val();
             var role_name = $("#roleName").val();
-            var role_flag = $("#roleFlag").val();
+            var role_flag = $("#role_flag").val();
             // TODO 通知数据表格进行数据查询
             $('#role_table').datagrid("load",{
                 roleId: role_id,
                 roleName: role_name,
                 roleFlag: role_flag
+            });
+        });
+
+        /**
+         * 重置按钮点击事件
+         */
+        $("#search_b").click(function(){
+            $("#role_search_form").form("reset");
+            $('#role_flag').combobox("select",3);
+
+            $('#role_table').datagrid('load',{
+                roleId: '',
+                roleName: '',
+                roleFlag: ''
             });
         });
 

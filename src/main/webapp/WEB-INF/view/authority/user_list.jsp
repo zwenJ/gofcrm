@@ -17,15 +17,18 @@
             <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
         </div>
         <div id="datagrid_search_form">
-            编号: <input class="easyui-textbox" type="text" style="width:100px" id="userId" name="userId"/>
-            姓名: <input class="easyui-textbox" type="text" style="width:100px" id="userName" name="userName"/>
-            职位:
-            <input id="user_list_role" name="roleList"
-                    panelHeight="auto" style="width:100px" />
-            状态：
-            <input id="user_flag" name="userFlag"
-                   panelHeight="auto" style="width:100px" />
-            <a href="javascript:;" id="search_a" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+            <form id="search_form">
+                编号: <input class="easyui-textbox" type="text" style="width:100px" id="userId" name="userId"/>
+                姓名: <input class="easyui-textbox" type="text" style="width:100px" id="userName" name="userName"/>
+                职位:
+                <input id="user_list_role" name="roleList"
+                       panelHeight="auto" style="width:100px" />
+                状态：
+                <input id="user_flag" name="userFlag"
+                       panelHeight="auto" style="width:100px" />
+                <a href="javascript:;" id="search_a" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+                <a href="javascript:;" id="search_b" class="easyui-linkbutton" iconCls="icon-search">重置</a>
+            </form>
         </div>
     </div>
     <script>
@@ -62,6 +65,7 @@
          */
         $('#user_list_role').combobox({
             url:'role/combo',
+            method:"get",
             valueField:'id',
             textField:'text',
             limitToList:true,
@@ -92,6 +96,22 @@
                 userName: user_name,
                 userRole: user_list_role,
                 userFlag: user_flag
+            });
+        });
+
+        /**
+         * 重置表单按钮
+         */
+        $("#search_b").click(function(){
+            $("#search_form").form("reset");
+            $('#user_list_role').combobox("select","all");
+            $('#user_flag').combobox("select",3);
+
+            $('#user_table').datagrid('load',{
+                userId: '',
+                userName: '',
+                userRole: '',
+                userFlag: ''
             });
         });
 

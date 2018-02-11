@@ -50,8 +50,20 @@
     SELECT <include refid="Base_Column_List"/>
     FROM sys_role
     <trim prefix="WHERE" suffixOverrides="AND">
-      <if test="roleId != null and roleId != ''">
-        role_id = #{roleId,jdbcType=VARCHAR} AND
+      <if test=" roleId != null ">
+        <if test=" roleId[0] != null and roleId[0] != '' ">
+          role_id = #{roleId[0]} AND
+        </if>
+      </if>
+      <if test=" roleName != null ">
+        <if test=" roleName[0] != null and roleName[0] != '' ">
+          role_name like '%${roleName[0]}%' AND
+        </if>
+      </if>
+      <if test=" roleFlag != null ">
+        <if test=" roleFlag[0] != null and roleFlag != 3 ">
+          role_flag = #{roleFlag[0]} AND
+        </if>
       </if>
     </trim>
   </select>
@@ -62,7 +74,7 @@
   </select>
 
   <!-- 根据用户编号 查询 角色信息 -->
-  <select id="selectByUserIdRole" resultMap="BaseResultMap" parameterType="map">
+  <select useCache="true" id="selectByUserIdRole" resultMap="BaseResultMap" parameterType="map">
     SELECT <include refid="Table_role_column_A"/>
     FROM sys_user as B
     LEFT JOIN user_role as Z ON Z.user_id = B.user_id

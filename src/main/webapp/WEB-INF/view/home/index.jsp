@@ -31,7 +31,7 @@
                 </span>
                 <span>&nbsp;|&nbsp;</span>
                 <span class="right">
-                    <a href="javascript:loadWin('个人配置','shiro/site/config.action')">配置</a>
+                    <a href="javascript:loadWin('个人配置','to/view/authority/user_personal_center')">配置</a>
                 </span>
             </td>
         </tr>

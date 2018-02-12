@@ -69,7 +69,7 @@ public class AuthController extends ParentController {
     }
 
     /**
-     * 查询获取一个权限集合 爱上东方阿萨德阿萨德
+     * 查询获取一个权限集合
      * @param apId
      * @param at
      * @return

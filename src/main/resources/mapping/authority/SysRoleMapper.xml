@@ -61,7 +61,7 @@
         </if>
       </if>
       <if test=" roleFlag != null ">
-        <if test=" roleFlag[0] != null and roleFlag != 3 ">
+        <if test=" roleFlag[0] != null and roleFlag[0] != '' and roleFlag[0] != 3 ">
           role_flag = #{roleFlag[0]} AND
         </if>
       </if>

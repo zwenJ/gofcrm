@@ -60,7 +60,7 @@ public class RoleController extends ParentController {
      * 作为 下拉框数据集合返回
      * @return
      */
-    @RequestMapping("/combo")
+    @RequestMapping(value = "/combo", method = RequestMethod.GET)
     public List<Combo> getCombo() {
         List<Combo> comboList = null;
         pageBean.setPaginate(false);  //不需要分页

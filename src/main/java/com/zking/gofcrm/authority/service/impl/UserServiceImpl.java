@@ -1,13 +1,11 @@
 package com.zking.gofcrm.authority.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.zking.gofcrm.authority.mapper.SysRoleMapper;
 import com.zking.gofcrm.authority.mapper.SysUserMapper;
 import com.zking.gofcrm.authority.model.SysRole;
 import com.zking.gofcrm.authority.model.SysUser;
 import com.zking.gofcrm.authority.service.IUserService;
-import com.zking.gofcrm.common.service.IBaseService;
+import com.zking.gofcrm.common.message.Message;
 import com.zking.gofcrm.common.service.ICsfService;
 import com.zking.gofcrm.common.util.page.PageBean;
 import org.slf4j.Logger;
@@ -92,6 +90,69 @@ public class UserServiceImpl implements IUserService {
         return false;
     }
 
+
+    /**
+     * 编辑（修改）方法，传入要修改的对象（必须保证要有主键(id)）
+     *
+     * @param stringMap
+     * @return
+     */
+    public Message editObj(Map<String, String[]> stringMap) {
+        Message message = new Message();
+        message.setType("sysUser");
+
+        if (null != stringMap) {
+            if (stringMap.get("userId")[0] == "") {
+                message.setMessage("请重新登录再试");
+                return message;
+            }
+
+            /**
+             * 判断原密码是否正确
+             */
+            SysUser sysUser = toZhUser(stringMap);
+            if (!doAssignment(toZhMap(sysUser))) {
+                message.setMessage("请输入正确的旧密码！");
+                return message;
+            }
+
+            /**
+             * 开始修改为新的密码
+             */
+            sysUser.setUserPwd(stringMap.get("userPwd")[0]);
+            int update = sysUserMapper.updateByPrimaryKeySelective(sysUser);
+            if (update > 0) {
+                message.setResult(true);
+            }
+        }
+
+        return message;
+    }
+
+    /**
+     * 将集合转换为对象
+     * @param userMap
+     * @return
+     */
+    private SysUser toZhUser(Map<String, String[]> userMap) {
+        SysUser sysUser = new SysUser();
+        sysUser.setUserId(userMap.get("userId")[0]);
+        sysUser.setUserPwd(userMap.get("userPwdOld")[0]);
+        return sysUser;
+    }
+
+    /**
+     * 将对想转换成集合
+     * @param sysUser
+     * @return
+     */
+    private Map<String, Object> toZhMap(SysUser sysUser){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", sysUser.getUserId());
+        map.put("userPwd", sysUser.getUserPwd());
+        return map;
+    }
+
     /**
      * 加载（获取）一个对象，条件重PageBean的Map属性中获取，根据 K/V 式
      *
@@ -132,6 +193,12 @@ public class UserServiceImpl implements IUserService {
      * @return
      */
     public boolean doAssignment(Map<String, Object> map) {
+        SysUser sysUser = sysUserMapper.selectMapUser(map);
+        if (null != sysUser) {
+            if (sysUser.getUserId() != null && sysUser.getUserId() != "") {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -139,11 +206,11 @@ public class UserServiceImpl implements IUserService {
     /**
      * 用户登录
      *
-     * @param userName
+     * @param sysUser
      * @return
      */
-    public SysUser doLogin(String userName) {
-        return sysUserMapper.loginUser(userName);
+    public SysUser doLogin(SysUser sysUser) {
+        return sysUserMapper.loginUser(sysUser);
     }
 
     /**
@@ -154,12 +221,12 @@ public class UserServiceImpl implements IUserService {
      */
     public SysUser loadUser(String userName) {
 
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("userName", userName);
-
-        return sysUserMapper.selectMapUser(map);
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        map.put("userName", userName);
+//
+//        return sysUserMapper.selectMapUser(map);
+        return null;
     }
-
 
 
 }

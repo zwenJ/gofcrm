@@ -27,14 +27,12 @@ public interface SysUserMapper {
 
     /**
      * 用户登录
-     * @param userName
+     * @param sysUser
      * @return
      */
-    SysUser loginUser(String userName);
+    SysUser loginUser(SysUser sysUser);
 
     int updateByPrimaryKeySelective(SysUser record);
-
-    int updateByPrimaryKey(SysUser record);
 
     int judgeAuthz(Map<String, Object> map);
 

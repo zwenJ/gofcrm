@@ -2,12 +2,18 @@ package com.zking.gofcrm.authority.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.zking.gofcrm.authority.model.SysUser;
+import com.zking.gofcrm.authority.service.IUserService;
 import com.zking.gofcrm.common.controller.ParentController;
+import com.zking.gofcrm.common.message.Message;
 import com.zking.gofcrm.common.service.IBaseService;
 import com.zking.gofcrm.common.util.page.Datagrid;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,8 +33,8 @@ public class UserController extends ParentController {
 
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Resource(name = "UserServiceImpl")
-    private IBaseService<SysUser> sysUserServiceBase;
+    @Autowired
+    private IUserService userService;
 
     /**
      * 用户登录
@@ -40,34 +46,59 @@ public class UserController extends ParentController {
     public String login(@ModelAttribute("sysUser") SysUser sysUser) {
         logger.debug("用户登录："+sysUser);
 
-        /**
-         *
-         * 2 Shiro权限认证
-         * 3 告知结果
-         */
-        // TODO: 2018/1/20  1 服务器验证
-
-        // 2 Shiro权限认证
-
-        //获取用户令牌对象
-        UsernamePasswordToken upToken = new UsernamePasswordToken();
-        upToken.setUsername(sysUser.getUserName());
-        upToken.setPassword(sysUser.getUserPwd().toCharArray());
-
-        try{
-
-            logger.debug("开始认证");
-            subject.login(upToken);
-
-        } catch (Exception e){
-            logger.debug("认证失败，出现错误：", e);
+        //通知登录的方法
+        String info = loginUser(sysUser);
+        //判断登录结果
+        if ("error".equalsIgnoreCase(info)) {
             return "error";
         }
-
-        logger.debug("认证通过");
-
         //成功则重定向到进入首页的方法
         return "success";
+    }
+
+
+    /**
+     * 返回 用户 的集合
+     * @return
+     */
+    @RequestMapping("/show")
+    @ResponseBody
+    public Datagrid showUsers(){
+
+        //从数据库中查询
+        List<SysUser> sysUsers = userService.listObj(pageBean);
+
+        /**
+         * 返会数据网格
+         */
+        Datagrid datagrid = new Datagrid();
+        datagrid.setTotal(pageBean.getTotalRecord());
+        datagrid.setRows(sysUsers);
+
+        return datagrid;
+    }
+
+
+    /**
+     * 用户密码修改
+     * @return
+     */
+    @RequestMapping(value = "/update")
+    @ResponseBody
+    public Message updateUser(){
+
+        if (!isLogin()) {
+            //如果没有登录
+            return new Message("SysUser","请先登录");
+        }
+        // TODO: 18-2-13 通知业务逻辑层 实现修改用户密码的业务
+        Message messageUser = userService.editObj(pageBean.getParameterMap());
+        if (messageUser.getResult()) {
+            subject.logout();
+            messageUser.setMessage("修改密码成功，请重新登录！");
+        }
+
+        return messageUser;
     }
 
 
@@ -86,26 +117,56 @@ public class UserController extends ParentController {
     }
 
 
+
     /**
-     * 返回 用户 的集合
+     * 用户进行登录
+     * @param sysUser
      * @return
      */
-    @RequestMapping("/show")
-    @ResponseBody
-    public Datagrid showUsers(){
-
-        //从数据库中查询
-        List<SysUser> sysUsers = sysUserServiceBase.listObj(pageBean);
-
-        /**
-         * 返会数据网格
-         */
-        Datagrid datagrid = new Datagrid();
-        datagrid.setTotal(pageBean.getTotalRecord());
-        datagrid.setRows(sysUsers);
-
-        return datagrid;
+    private String loginUser(SysUser sysUser){
+        //如果已经登录
+        if (isLogin()) {
+            return "success";
+        }
+        //没有登录，调用Shiro认证
+        return shiroLogin(sysUser);
     }
 
+    /**
+     * 进行Shiro认证
+     * @param sysUser
+     * @return
+     */
+    private String shiroLogin(SysUser sysUser){
+        // 2 Shiro权限认证
+        //获取用户令牌对象
+        UsernamePasswordToken upToken = new UsernamePasswordToken();
+        upToken.setUsername(sysUser.getUserName());
+        upToken.setPassword(sysUser.getUserPwd().toCharArray());
+
+        try{
+            logger.debug("开始认证");
+            subject.login(upToken);
+        } catch (Exception e){
+            logger.debug("认证失败，出现错误：", e);
+            return "error";
+        }
+
+        logger.debug("认证通过");
+        return "success";
+    }
+
+
+    /**
+     * 判断用户是否已经登录
+     * @return
+     */
+    private boolean isLogin(){
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            return true;  //未发生改变，表明已经登录
+        }
+        return false;
+    }
 
 }

@@ -33,52 +33,44 @@
     <script>
         /**
          * 请求后台数据生成数据表格
+         * @param config     基础配置参数
+         * @param columns[]  列定义
          */
-        $('#user_table').datagrid({
-            url:'user/show',
-            fitColumns:true,   //表格大小是否适应父容器
-            pagination:true,   //是否显示底部分页工具栏
-            rownumbers:true,   //是否显示行号
-            singleSelect:true, //只允许选中一行
-            toolbar: '#user_table_tb',    //工具栏
-            columns:[[
-                {field:'userId',title:'编号',width:100},
-                {field:'userName',title:'姓名',width:100},
-                {field:'userFlag',title:'状态',width:100,formatter:function(value, row, index) {
-                        switch (value) {
-                            case 0:
-                                return "可用";
-                            case 1:
-                                return "不可用";
-                            default:
-                                return "未知";
-                        }
-                    }},
-                {field:'userAddId',title:'添加人',width:100},
-                {field:'userRole',title:'职位',width:100}
-            ]]
-        });
+        DatagridUtil.showDefaultDatagrid({
+            id:"#user_table",
+            url:"user/show",
+            toolbar:"#user_table_tb",
+        },[[
+            {field:'userId',title:'编号',width:100},
+            {field:'userName',title:'姓名',width:100},
+            {field:'userFlag',title:'状态',width:100,formatter:function(value, row, index) {
+                    switch (value) {
+                        case 0:
+                            return "可用";
+                        case 1:
+                            return "不可用";
+                        default:
+                            return "未知";
+                    }
+                }},
+            {field:'userAddId',title:'添加人',width:100},
+            {field:'userRole',title:'职位',width:100}
+        ]]);
 
         /**
          * 职位组合框
          */
-        $('#user_list_role').combobox({
-            url:'role/combo',
-            method:"get",
-            valueField:'id',
-            textField:'text',
-            limitToList:true,
+        ComboUtil.showCombobx({
+            id:"#user_list_role",
+            url:"role/combo",
         });
 
         /**
          * 状态参数
          */
-        $('#user_flag').combobox({
-            url: 'common/combo/userFlagCombo.json',
-            method: "get",
-            valueField: 'id',
-            textField: 'text',
-            limitToList: true,
+        ComboUtil.showCombobx({
+            id:"#user_flag",
+            url:"common/combo/userFlagCombo.json",
         });
 
         /**

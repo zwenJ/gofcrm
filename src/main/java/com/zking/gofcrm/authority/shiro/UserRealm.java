@@ -4,10 +4,12 @@ import com.zking.gofcrm.authority.model.SysAuthority;
 import com.zking.gofcrm.authority.model.SysRole;
 import com.zking.gofcrm.authority.model.SysUser;
 import com.zking.gofcrm.authority.service.IUserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +30,12 @@ public class UserRealm extends AuthorizingRealm {
     private Logger logger = LoggerFactory.getLogger(UserRealm.class);
 
     @Autowired
-    private SysUser sysUser;
-
-    @Autowired
     private IUserService sysUserServices;
+
+    /**
+     * 用户的铭牌
+     */
+    public static final String APP_USER = "APP_USER_SHIRO";
 
     /**
      * 用户授权
@@ -39,16 +43,12 @@ public class UserRealm extends AuthorizingRealm {
      * @return
      */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        //获取认证过的用户对象
-        String userName = (String) principalCollection.getPrimaryPrincipal();
-        System.out.println("正在授权用户："+userName);
-
-        //获取一个用户的具体信息
-        sysUser = sysUserServices.loadUser(userName);
+        SysUser sysUser = (SysUser) SecurityUtils.getSubject().getSession().getAttribute(UserRealm.APP_USER);
 
         //根据用户名查询用户的角色，权限
         ArrayList<String> roleList = new ArrayList<String>();
         ArrayList<String> authzList = new ArrayList<String>();
+
         //遍历角色
         for (SysRole sysRole : sysUser.getRoleList()) {
             //授权角色
@@ -68,7 +68,6 @@ public class UserRealm extends AuthorizingRealm {
         authorizationInfo.addRoles(roleList);
         authorizationInfo.addStringPermissions(authzList);
 
-
         return authorizationInfo;
     }
 
@@ -82,31 +81,40 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
             throws AuthenticationException {
 
-        //获取用户令牌
-        UsernamePasswordToken upToken = (UsernamePasswordToken) authenticationToken;
-        //从用户令牌中获取用户名
-        String name = upToken.getUsername();
+        //令牌转用户
+        SysUser sysUser = tokenConversionUser((UsernamePasswordToken) authenticationToken);
 
-        //认证
-        SimpleAuthenticationInfo auth = null;
-
-       try{
-
-           //通知服务层，进行数据库查询
-           sysUser = sysUserServices.doLogin(name);
-
-       } catch (Exception e){
-         e.printStackTrace();
-       }
-
-        if (null != sysUser) {
-            //令牌认证
-            auth = new SimpleAuthenticationInfo(name,
-                    sysUser.getUserPwd(),
-                    this.getName());
+        //数据库查询，是否可以登录
+        sysUser = sysUserServices.doLogin(sysUser);
+        if (null == sysUser) {
+            return null;   //做异常处理，无法登录
         }
 
-        return auth;
+        //session保存
+        Session session = SecurityUtils.getSubject().getSession();
+        session.setAttribute(UserRealm.APP_USER, sysUser);
+
+        //当前的Realm的name
+        String realmName = this.getName();
+
+        //获取Principal，可以是一个对象，但是该对想还是根据Principal的username和password来得到的
+        Object principal = authenticationToken.getPrincipal();
+        return new SimpleAuthenticationInfo(principal,
+                sysUser.getUserPwd(),
+                realmName);
+    }
+
+
+    /**
+     * 将用户令牌转换为用户对象
+     * @param token
+     * @return
+     */
+    private SysUser tokenConversionUser(UsernamePasswordToken token){
+        SysUser sysUser = new SysUser();
+        sysUser.setUserName(token.getUsername());
+        sysUser.setUserPwd(String.valueOf(token.getPassword()));
+        return sysUser;
     }
 
 

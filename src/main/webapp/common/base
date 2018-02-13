@@ -10,3 +10,9 @@
 <script type="text/javascript" src="mylib/easyui/jquery-easyui-1.5.3/locale/easyui-lang-zh_CN.js"></script>
 <link rel="stylesheet" type="text/css" href="mylib/easyui/jquery-easyui-1.5.3/plugins/texteditor/texteditor.css">
 <script type="text/javascript" src="mylib/easyui/jquery-easyui-1.5.3/plugins/texteditor/jquery.texteditor.js"></script>
+<!-- 数据网格集合工具 -->
+<script type="text/javascript" src="mylib/js/EasyuiUtil/DatagridUtil.js"></script>
+<!-- Combo下拉框集合工具 -->
+<script type="text/javascript" src="mylib/js/EasyuiUtil/ComboUtil.js"></script>
+<!-- 表单验证 -->
+<script type="text/javascript" src="mylib/js/EasyuiUtil/validatebox.js"></script>

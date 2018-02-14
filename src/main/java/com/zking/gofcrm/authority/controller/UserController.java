@@ -1,6 +1,8 @@
 package com.zking.gofcrm.authority.controller;
 
+import com.alibaba.druid.filter.AutoLoad;
 import com.github.pagehelper.PageHelper;
+import com.zking.gofcrm.authority.config.ApplicationCode;
 import com.zking.gofcrm.authority.model.SysUser;
 import com.zking.gofcrm.authority.service.IUserService;
 import com.zking.gofcrm.common.controller.ParentController;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import scala.App;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -33,6 +36,8 @@ public class UserController extends ParentController {
 
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    private final String CODE_USER_LOGIN = "LOGIN_USER";
+
     @Autowired
     private IUserService userService;
 
@@ -43,17 +48,17 @@ public class UserController extends ParentController {
      */
     @RequestMapping(value = "/login")
     @ResponseBody
-    public String login(@ModelAttribute("sysUser") SysUser sysUser) {
+    public Message login(@ModelAttribute("sysUser") SysUser sysUser) {
         logger.debug("用户登录："+sysUser);
 
         //通知登录的方法
         String info = loginUser(sysUser);
         //判断登录结果
         if ("error".equalsIgnoreCase(info)) {
-            return "error";
+            return new Message(CODE_USER_LOGIN, ApplicationCode.LOGIN_ERROR.getMessage(), ApplicationCode.LOGIN_ERROR.getCode());
         }
         //成功则重定向到进入首页的方法
-        return "success";
+        return new Message(CODE_USER_LOGIN, ApplicationCode.LOGIN_SUCCESS.getMessage(), ApplicationCode.LOGIN_SUCCESS.getCode());
     }
 
 

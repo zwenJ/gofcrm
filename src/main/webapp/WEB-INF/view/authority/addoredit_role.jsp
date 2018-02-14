@@ -62,7 +62,7 @@
          */
         function form_submit(){
             // TODO 提交表单之前进行表达验证
-            alert("请求提交表单");
+            console.log("请求提交表单");
             $('#add_role_form').form('submit', {
                     url:"role/addrole",
                 onSubmit: function(param){

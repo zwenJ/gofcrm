@@ -102,3 +102,22 @@
 .icon-my-gn{
 	background: url("icons/gongnen.png") no-repeat center center;
 }
+
+.icon-kh-manager{
+	background: url("icons/kh_manger.png") no-repeat center center;
+}
+.icon-kh-server{
+	background: url("icons/kh_server.png") no-repeat center center;
+}
+.icon-kh-tongji{
+	background: url("icons/tongji.png") no-repeat center center;
+}
+.icon-kh-chanpin{
+	background: url("icons/kh_chanpin.png") no-repeat center center;
+}
+.icon-kh-system{
+	background: url("icons/kh_system.png") no-repeat center center;
+}
+.icon-kh-yingxiao{
+	background: url("icons/yingxiao.png") no-repeat center center;
+}

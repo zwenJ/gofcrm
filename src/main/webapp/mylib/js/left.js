@@ -34,9 +34,7 @@ $(function(){
             //在其内部生成树
             $("ul[name='accordion_tree_"+title+"']").tree({
                 url:"auth/tree?apId="+auth_id_sz[index],
-
                 onClick:function (node) {
-
                     /**
                      * 用于判断用户是否已经登陆
                      */

@@ -116,11 +116,16 @@
                 return $("#form_login").form("validate");
             },
             success: function (data) {
-                if (data.trim() == "success") {
+                data = eval("("+data+")");
+                console.log(data);
+                $.messager.show({
+                    title:'登录提示',
+                    msg:data.message+"，本弹框将在5秒后关闭",
+                    timeout:5000,
+                    showType:'slide'
+                });
+                if ("100003" == data.status) {
                     window.location.href = "/gofcrm/to/home";
-                } else {
-                    //提示信息
-                    alert("用户登陆失败！");
                 }
             }
         });
@@ -130,4 +135,3 @@
     }
 </script>
 </body>
-<

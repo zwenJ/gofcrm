@@ -1,6 +1,10 @@
 package com.zking.gofcrm.common.message;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 描述： 后台操作返回的消息
@@ -8,7 +12,10 @@ import java.io.Serializable;
  * Date: 18-2-13
  * Time: 下午2:18
  */
+@Component
 public class Message implements Serializable {
+
+    private final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 消息类型
@@ -23,7 +30,7 @@ public class Message implements Serializable {
     /**
      * 状态码
      */
-    private Integer status;
+    private String status;
 
     /**
      * 处理结果
@@ -42,27 +49,31 @@ public class Message implements Serializable {
     public Message(String type, String message) {
         this.type = type;
         this.message = message;
+        setDatas();
     }
 
-    public Message(String type, String message, Integer status) {
+    public Message(String type, String message, String status) {
         this.type = type;
         this.message = message;
         this.status = status;
+        setDatas();
     }
 
-    public Message(String type, String message, Integer status, String datas) {
+    public Message(String type, String message, String status, String datas) {
         this.type = type;
         this.message = message;
         this.status = status;
         this.datas = datas;
+        setDatas();
     }
 
-    public Message(String type, String message, Integer status, boolean result, String datas) {
+    public Message(String type, String message, String status, boolean result, String datas) {
         this.type = type;
         this.message = message;
         this.status = status;
         this.result = result;
         this.datas = datas;
+        setDatas();
     }
 
     public String getType() {
@@ -81,11 +92,11 @@ public class Message implements Serializable {
         this.message = message;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -93,8 +104,8 @@ public class Message implements Serializable {
         return datas;
     }
 
-    public void setDatas(String datas) {
-        this.datas = datas;
+    private void setDatas() {
+        this.datas = SDF.format(new Date());
     }
 
     public boolean getResult() {

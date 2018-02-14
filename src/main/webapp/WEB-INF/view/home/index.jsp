@@ -37,7 +37,7 @@
         </tr>
     </table>
     <!-- 左边功能分类面板 -->
-    <div id="accordion_div" class="easyui-accordion"  data-options="fit:false,animate:true" ></div>
+    <div id="accordion_div" class="easyui-accordion"  data-options="fit:false,animate:true,multiple:true" ></div>
 </div>
 <div data-options="region:'center',border:false">
 

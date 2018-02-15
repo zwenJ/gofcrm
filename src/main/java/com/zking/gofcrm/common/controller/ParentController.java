@@ -1,11 +1,9 @@
 package com.zking.gofcrm.common.controller;
 
 import com.zking.gofcrm.common.util.page.PageBean;
-import com.zking.gofcrm.dictionary.model.Dictionary;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;

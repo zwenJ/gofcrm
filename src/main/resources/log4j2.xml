@@ -24,14 +24,14 @@
 		    Loggers     :  详解见下面配置
 		(表明可以定义多个Appender和Logger).
 -->
-<Configuration status="WARN" monitorInterval="30">
+<Configuration status="DEBUG" monitorInterval="30">
 
 	<!-- 基本属性配置节点 -->
 	<Properties>
-		<!-- 配置日志文件输出目录 ${sys:user.home} -->
-		<Property name="LOG_HOME">D:\gofcrm\logs</Property>
-		<property name="ERROR_LOG_FILE_NAME">D:\gofcrm\logs\error</property>
-		<property name="WARN_LOG_FILE_NAME">D:\gofcrm\logs\warn</property>
+		<!-- 配置日志文件输出目录 ${sys:user.home} /media/jzw/软件/gofcrm-->
+		<Property name="LOG_HOME">${sys:user.home}/</Property>
+		<property name="ERROR_LOG_FILE_NAME">${sys:user.home}/logs/error</property>
+		<property name="WARN_LOG_FILE_NAME">${sys:user.home}/logs/warn</property>
 		<property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t-%L] %-5level %logger{36} - %msg%n</property>
 	</Properties>
 

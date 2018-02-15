@@ -87,7 +87,7 @@
                 <value>com.zking.gofcrm.authority.model.SysRole</value>
                 <value>com.zking.gofcrm.authority.model.SysAuthority</value>
                 <value>com.zking.gofcrm.authority.model.SysFunction</value>
-                <value>com.zking.gofcrm.dictionary.model.Dictionary</value>
+                <value>com.zking.gofcrm.basd.model.Dictionary</value>
             </array>
         </property>
 

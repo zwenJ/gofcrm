@@ -68,7 +68,7 @@ public class UserController extends ParentController {
      */
     @RequestMapping("/show")
     @ResponseBody
-    public Datagrid showUsers(){
+    public Datagrid showUsers(Datagrid datagrid){
 
         //从数据库中查询
         List<SysUser> sysUsers = userService.listObj(pageBean);
@@ -76,7 +76,6 @@ public class UserController extends ParentController {
         /**
          * 返会数据网格
          */
-        Datagrid datagrid = new Datagrid();
         datagrid.setTotal(pageBean.getTotalRecord());
         datagrid.setRows(sysUsers);
 

@@ -24,18 +24,18 @@
                     <th>类别</th>
                     <td colspan="4">
                         <input id="dict_type_input" class="easyui-textbox" type="text" style="width:200px" name="dictType"/>
-                        <span class="red_star">*</span><br />（需要使用Ajax实现自动补全功能）
+                        <span class="red_star">*</span><br />
                     </td>
                 </tr>
                 <tr>
                     <th>条目</th>
                     <td>
-                        <input class="easyui-textbox" type="text" style="width:200px" name="dictItem"/>
+                        <input class="easyui-validatebox" type="text" style="width:200px" name="dictItem" data-options="required:true"/>
                         <span class="red_star">*</span>
                     </td>
                     <th>值</th>
                     <td>
-                        <input class="easyui-textbox" type="text" style="width:200px" name="dictValue"/>
+                        <input class="easyui-validatebox" type="text" style="width:200px" name="dictValue" data-options="required:true"/>
                         <span class="red_star">*</span>
                     </td>
                 </tr>
@@ -75,6 +75,7 @@
                         if (_result.result) {
                             //添加成功，关闭窗口
                             $('#win_main').window('close');
+                            $("#dict_table").datagrid('reload');
                         }
                     }
                 });

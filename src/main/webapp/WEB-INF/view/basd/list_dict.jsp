@@ -18,8 +18,8 @@
     <div id="dict_table_tb" style="padding:5px;height:auto">
         <div style="margin-bottom:5px">
             <a href="javascript:loadWin('添加字典', 'to/view/basd/dict_add')" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" disabled></a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" disabled></a>
+            <a href="javascript:;" id="edit_a_dict" class="easyui-linkbutton" iconCls="icon-edit" plain="true" disabled></a>
+            <a href="javascript:;" id="remove_a_dict" class="easyui-linkbutton" iconCls="icon-remove" plain="true" disabled></a>
         </div>
         <div id="datagrid_dict_search_form">
             <form id="dict_table_search_form">
@@ -40,7 +40,7 @@
         DatagridUtil.showDefaultDatagrid({
             id:"#dict_table",
             url:"dict/show",
-            toolbar:"#dict_table_tb",
+            toolbar:"#dict_table_tb"
         },[[
             {field:'dictId',title:'编号',width:100},
             {field:'dictType',title:'类别',width:100},
@@ -56,13 +56,15 @@
                 }}
         ]]);
 
-        //TODO 接着这里继续写
-        // 在双击一个单元格的时候开始编辑并生成编辑器，然后定位到编辑器的输入框上
-        $('#dict_table').datagrid({
-            onDblClickCell: function(index,field,value){
-                $('#dict_table').datagrid('beginEdit', index);
-                var ed = $('#dict_table').datagrid('getEditor', {index:index,field:field});
-                $(ed.target).focus();
+
+        /**
+         * 选中一行，启用编辑和删除按钮
+         */
+        $("#dict_table").datagrid({
+            onClickRow:function(index, row) {
+                //启用按钮
+                $('#edit_a_dict').linkbutton('enable');
+                $('#remove_a_dict').linkbutton('enable');
             }
         });
 
@@ -78,7 +80,7 @@
             $('#dict_table').datagrid("load",{
                 dictType: dict_type,
                 dictItem: dict_item,
-                dictValue: dict_value,
+                dictValue: dict_value
             });
         });
 
@@ -90,8 +92,39 @@
             $('#dict_table').datagrid('load',{
                 dictType: '',
                 dictItem: '',
-                dictValue: '',
+                dictValue: ''
             });
+        });
+
+        /**
+         * 编辑按钮
+         */
+        $('#edit_a_dict').click(function(){
+
+        });
+
+        /**
+         * 删除按钮
+         */
+        $('#remove_a_dict').click(function(){
+            var dict_table_rows = $("#dict_table").datagrid('getSelected');
+            console.log(dict_table_rows);
+            if (dict_table_rows) {
+                if (confirm('你确定要删除？')) {
+                    $.post("dict/remove",{
+                        dictId: dict_table_rows.dictId
+                    },function (_result) {
+                        console.log(_result);
+                        alert(_result.message);
+                        if (_result.result){
+                            $("#dict_table").datagrid('reload');
+                        }
+                    });
+                }
+            }
+            else {
+                alert('请选择一行!');
+            }
         });
     </script>
 </body>

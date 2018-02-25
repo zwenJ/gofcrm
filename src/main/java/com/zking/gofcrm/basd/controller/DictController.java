@@ -80,4 +80,34 @@ public class DictController extends ParentController {
     }
 
 
+
+    @RequestMapping("/remove")
+    @ResponseBody
+    public Message remove(@ModelAttribute("dictId") Integer dictId, Message message) {
+        message.setType("DEL_DICT");
+        if (dictId == null) {
+            message.setMessage("参数错误！");
+            message.setDatas();
+            message.setStatus("DICT-10003");
+            return message;
+        }
+
+        // TODO: 2018/2/25 通知业务逻辑层实现移除操作
+        boolean delObj = dictService.delObj(dictId);
+        message.setResult(delObj);
+
+        if (!delObj) {
+            message.setMessage("操作失败！");
+            message.setDatas();
+            message.setStatus("DICT-10002");
+            return message;
+        }
+
+        message.setMessage("操作成功！");
+        message.setStatus("DICT-10001");
+        message.setDatas();
+        return message;
+    }
+
+
 }

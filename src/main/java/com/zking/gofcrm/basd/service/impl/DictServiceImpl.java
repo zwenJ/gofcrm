@@ -43,6 +43,10 @@ public class DictServiceImpl implements IDictService {
      * @return
      */
     public boolean delObj(Integer id) {
+        //执行并返回结果
+        if (dictionaryMapper.deletePrimaryKey(id) > 0) {
+            return true;
+        }
         return false;
     }
 

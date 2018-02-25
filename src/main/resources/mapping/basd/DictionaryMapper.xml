@@ -19,7 +19,12 @@
     dict_id, dict_type, dict_item, dict_value, dict_is_editable
   </sql>
 
-  <!-- 查询该数据是否支持修改 -->
+  <!-- 根据主键删除字典条例 -->
+  <delete id="deletePrimaryKey" parameterType="integer">
+    DELETE FROM crm_dict WHERE dict_id = #{dictId}
+  </delete>
+
+    <!-- 查询该数据是否支持修改 -->
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select dict_is_editable
     from crm_dict

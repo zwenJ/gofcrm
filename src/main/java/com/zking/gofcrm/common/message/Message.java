@@ -102,7 +102,7 @@ public class Message implements Serializable {
         return datas;
     }
 
-    private void setDatas() {
+    public void setDatas() {
         this.datas = SDF.format(new Date());
     }
 

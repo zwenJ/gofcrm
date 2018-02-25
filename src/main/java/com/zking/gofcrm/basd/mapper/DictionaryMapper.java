@@ -45,4 +45,6 @@ public interface DictionaryMapper {
      */
     List<Combo> getDictTypes();
 
+    int deletePrimaryKey(Integer dictId);
+
 }

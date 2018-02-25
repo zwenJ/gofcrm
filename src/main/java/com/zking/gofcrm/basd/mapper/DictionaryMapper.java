@@ -1,6 +1,7 @@
 package com.zking.gofcrm.basd.mapper;
 
 import com.zking.gofcrm.basd.model.Dictionary;
+import com.zking.gofcrm.common.util.combo.Combo;
 
 import java.util.List;
 import java.util.Map;
@@ -36,5 +37,12 @@ public interface DictionaryMapper {
      * @return
      */
     List<Dictionary> selectByMap(Map<String, String[]> map);
+
+
+    /**
+     * 获取数据字典类型集合
+     * @return
+     */
+    List<Combo> getDictTypes();
 
 }

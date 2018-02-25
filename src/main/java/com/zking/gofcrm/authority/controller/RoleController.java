@@ -2,9 +2,7 @@ package com.zking.gofcrm.authority.controller;
 
 import com.zking.gofcrm.authority.model.SysRole;
 import com.zking.gofcrm.authority.service.IRoleService;
-import com.zking.gofcrm.authority.util.AuthTree;
 import com.zking.gofcrm.common.controller.ParentController;
-import com.zking.gofcrm.common.service.IBaseService;
 import com.zking.gofcrm.common.util.combo.Combo;
 import com.zking.gofcrm.common.util.page.Datagrid;
 import org.slf4j.Logger;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.management.relation.Role;
 import java.util.*;
 
 /**

@@ -29,9 +29,9 @@
 	<!-- 基本属性配置节点 -->
 	<Properties>
 		<!-- 配置日志文件输出目录 ${sys:user.home} /media/jzw/软件/gofcrm-->
-		<Property name="LOG_HOME">${sys:user.home}/</Property>
-		<property name="ERROR_LOG_FILE_NAME">${sys:user.home}/logs/error</property>
-		<property name="WARN_LOG_FILE_NAME">${sys:user.home}/logs/warn</property>
+		<Property name="LOG_HOME">E:\LOGS\gof_crm\</Property>
+		<property name="ERROR_LOG_FILE_NAME">E:\LOGS\gof_crm\logs\error</property>
+		<property name="WARN_LOG_FILE_NAME">E:\LOGS\gof_crm\logs\warn</property>
 		<property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t-%L] %-5level %logger{36} - %msg%n</property>
 	</Properties>
 

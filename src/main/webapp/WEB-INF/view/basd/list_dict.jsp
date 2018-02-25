@@ -17,10 +17,9 @@
 
     <div id="dict_table_tb" style="padding:5px;height:auto">
         <div style="margin-bottom:5px">
-            <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"></a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
+            <a href="javascript:loadWin('添加字典', 'to/view/basd/dict_add')" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" disabled></a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" disabled></a>
         </div>
         <div id="datagrid_dict_search_form">
             <form id="dict_table_search_form">
@@ -54,8 +53,18 @@
                         default:
                             return "不可编辑";
                     }
-                }},
+                }}
         ]]);
+
+        //TODO 接着这里继续写
+        // 在双击一个单元格的时候开始编辑并生成编辑器，然后定位到编辑器的输入框上
+        $('#dict_table').datagrid({
+            onDblClickCell: function(index,field,value){
+                $('#dict_table').datagrid('beginEdit', index);
+                var ed = $('#dict_table').datagrid('getEditor', {index:index,field:field});
+                $(ed.target).focus();
+            }
+        });
 
 
         /**

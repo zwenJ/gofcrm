@@ -1,5 +1,6 @@
 package com.zking.gofcrm.basd.service.impl;
 
+import com.zking.gofcrm.common.util.combo.Combo;
 import com.zking.gofcrm.common.util.page.PageBean;
 import com.zking.gofcrm.basd.mapper.DictionaryMapper;
 import com.zking.gofcrm.basd.model.Dictionary;
@@ -102,6 +103,18 @@ public class DictServiceImpl implements IDictService {
      */
     public boolean doAssignment(Map<String, Object> map) {
         return false;
+    }
+
+
+    /**
+     * 获取数据字典类型集合
+     *
+     * @return
+     */
+    public List<Combo> getDictTypelist() {
+        List<Combo> dictTypes = dictionaryMapper.getDictTypes();
+        dictTypes.get(0).setSelected(true);//默认设置第一个选中
+        return dictTypes;
     }
 
 }

@@ -31,7 +31,6 @@ public class DictServiceImplTest extends BaseCodeTest{
         dictionary.setDictItem("地区");          //设置字典条例
         dictionary.setDictType("cst_customer");  //该字段所属表
         dictionary.setDictValue("华北地区");     //具体的值
-        dictionary.setDictValueId("暂无");       //该条例 所 对应 的对象编号
 
         System.out.println(dictService.addObj(dictionary));
 
@@ -47,7 +46,6 @@ public class DictServiceImplTest extends BaseCodeTest{
 
         Dictionary dictionary = new Dictionary();
         dictionary.setDictId(2);
-        dictionary.setDictValueId("1");
 
         System.out.println(dictService.editObj(dictionary));
 

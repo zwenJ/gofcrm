@@ -12,7 +12,7 @@
  -->
 
     <!-- 连接数据库的工具包，本地的连接mysql的jar包 -->
-    <classPathEntry location="/media/jzw/文档/mavenrepo/repository/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar"/>
+    <classPathEntry location="F:\mavenrepo\repository\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar"/>
 
     <!-- 一些基本参数的配置 -->
     <context id="context" targetRuntime="MyBatis3">

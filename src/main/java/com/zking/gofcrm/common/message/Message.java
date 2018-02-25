@@ -64,7 +64,6 @@ public class Message implements Serializable {
         this.message = message;
         this.status = status;
         this.datas = datas;
-        setDatas();
     }
 
     public Message(String type, String message, String status, boolean result, String datas) {
@@ -73,7 +72,6 @@ public class Message implements Serializable {
         this.status = status;
         this.result = result;
         this.datas = datas;
-        setDatas();
     }
 
     public String getType() {

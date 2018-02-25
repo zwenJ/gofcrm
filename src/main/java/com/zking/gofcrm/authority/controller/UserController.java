@@ -1,13 +1,10 @@
 package com.zking.gofcrm.authority.controller;
 
-import com.alibaba.druid.filter.AutoLoad;
-import com.github.pagehelper.PageHelper;
 import com.zking.gofcrm.authority.config.ApplicationCode;
 import com.zking.gofcrm.authority.model.SysUser;
 import com.zking.gofcrm.authority.service.IUserService;
 import com.zking.gofcrm.common.controller.ParentController;
 import com.zking.gofcrm.common.message.Message;
-import com.zking.gofcrm.common.service.IBaseService;
 import com.zking.gofcrm.common.util.page.Datagrid;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -15,14 +12,11 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import scala.App;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
